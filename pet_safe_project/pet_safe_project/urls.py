@@ -1,6 +1,7 @@
-from django.urls import path
-from django.urls.conf import include
+#from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('', include('emr_app.urls')),
+    #path('admin/', admin.site.urls),
+    path('', include('pet_safe_app.urls')),
 ]
