@@ -25,28 +25,6 @@
                     <button type="submit" class="btn btn-success">Insertar</button>
                 </form>
                 <hr>
-                <form class="border border-success p-5" action="/add/especialidad/" method="POST" style="height: 280px;">
-                    <h4>Especialidades</h4>
-                    {% csrf_token %} 
-                    <label class="form-label" for="especialidad">Especialidad:</label>
-                    <input class="form-control" name="especialidad" type="text"><br>
-                    <button type="submit" class="btn btn-success">Insertar</button>
-                </form>
-                <hr>
-                <form class="border border-success p-5" action="/add/hora/" method="POST" style="height: 280px;">
-                    <h4>Horarios</h4>
-                    {% csrf_token %} 
-                    <select class="form-control" name="users" id="users">
-                        {% for user in users %}
-                        {% if user.rol_id.id == 1 %}
-                        <option value="{{user.id}}">{{user.sfname}}  {{user.slname}}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
-                    <label class="form-label" for="hora">Horarios:</label>
-                    <input class="form-control" name="hora" type="text"><br>
-                    <button type="submit" class="btn btn-success">Insertar</button>
-                </form>
             </div>
         </div>
     </div>
