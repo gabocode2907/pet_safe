@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields import CharField, DateField, DateTimeField, DecimalField, EmailField, IntegerField, PositiveSmallIntegerField, TextField, TimeField
+from django.db.models.fields import CharField, DateField, DateTimeField, DecimalField, EmailField, IntegerField, PositiveSmallIntegerField, SmallIntegerField, TextField, TimeField
 from datetime import date
 import re,bcrypt
 from django.db.models.fields.files import ImageField
@@ -115,6 +115,7 @@ class Pet(models.Model):
     pet_weight = DecimalField(decimal_places=2, max_digits=5)
     pet_color = CharField(max_length=50)
     description = CharField(max_length=250)
+    is_lost = SmallIntegerField()
     pet_image = ImageField(upload_to='pet_image/')
     pet_owner = ForeignKey(User, related_name='pets_owner', on_delete=CASCADE)
     vaccines = ForeignKey(Vaccine, related_name="pet_vaccines",on_delete=CASCADE)
