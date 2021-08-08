@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-            <form class="border border-success p-5" action="/add/client/" method="POST">
+            <form class="border border-success p-5" action="/add/user/" method="POST">
                 <h4>New User</h4>
                 {% if messages %}
                     {% for message in messages %}
@@ -38,7 +38,7 @@
                 <label class="form-label" for="cphone">Cell Phone:</label>
                 <input class="form-control" name="cphone" maxlength="10" type="text">
                 <label class="form-label" for="sexo">Gender:</label>
-                <select class="form-control" name="sexo" id="role">
+                <select class="form-control" name="sexo" id="sexo">
                     {% for gender in genders %}
                     <option value="{{gender.id}}">{{gender.gender}}</option>
                     {% endfor %}
