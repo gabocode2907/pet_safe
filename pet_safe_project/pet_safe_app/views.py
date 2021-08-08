@@ -43,7 +43,7 @@ def addRole(request):
     #     messages.error(request,"There is not logged user!! Log in first!")
     #     return redirect('/')
     if request.method == "POST":
-        Role.objects.create(rol=request.POST['role'])
+        Rol.objects.create(rol=request.POST['role'])
     return redirect('/admin/')
 
 def addGender(request):
