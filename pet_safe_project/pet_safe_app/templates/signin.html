@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <h2>Welcome to PetSafe</h2><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <p>Log-in to start!. If you don't have an account register first!</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <form class="border border-primary p-5" action="/signin/" method="POST">
+                {% if messages %}
+                    {% for message in messages %}
+                        {%if "login" in message.tags %}
+                    <ul>
+                        <li style="color: brown;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        {%if "success" in message.tags %}
+                    <ul>
+                        <li style="color: green;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                {% csrf_token %}
+                <input type="hidden" name="log_type" value="ct">
+                <label class="form-label" for="email">E-mail:</label>
+                <input class="form-control" type="email" name="email" id="email"><br>
+                <label class="form-label" for="pwd">Password:</label>
+                <input class="form-control" type="password" name="pwd" id="pwd"><br>
+                <button type="submit" class="btn btn-primary">Log-in</button>
+                <hr>
+                <label class="form-label" for="register">Don't have an account yet?</label>
+                <a class="btn btn-primary btn-sm" href="/register/" role="button">Register here</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
