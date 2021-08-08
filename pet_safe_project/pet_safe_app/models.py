@@ -67,7 +67,7 @@ class Clinic(models.Model):
     updated_at = DateField(auto_now=True)
 
 class ImmunizationHistory(models.Model):
-    year = PositiveSmallIntegerField(max_digits=2)
+    year = PositiveSmallIntegerField(max_length=2)
     vaccine = CharField(max_length=250)
     pet_vaccine_hist = ForeignKey(vetRecord, related_name='pet_vaccines', on_delete=CASCADE)
     clinic_vaccine_hist = ForeignKey(Clinic, related_name='clinic_vaccines', on_delete=CASCADE)
