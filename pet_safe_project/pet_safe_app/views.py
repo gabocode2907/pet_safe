@@ -1,4 +1,4 @@
-# from .models import Appointment, Especialidad, Hora, User, Client,Role,Gender
+from .models import  User,Rol,Gender
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls.conf import include
@@ -105,16 +105,14 @@ def  register(request):
 #             return redirect('/admin/')
 #     return redirect('/admin/')
 
-# def admin(request):
-#     roles = Role.objects.all()
-#     especialidades = Especialidad.objects.all()
-#     users = User.objects.all()
-#     context = {
-#         'roles' : roles,
-#         'users' : users,
-#         'especialidades' :especialidades
-#     }
-#     return render(request,'admin.html',context)
+def admin(request):
+    roles = Rol.objects.all()
+    users = User.objects.all()
+    context = {
+        'roles' : roles,
+        'users' : users,
+    }
+    return render(request,'admin.html',context)
 
 # def home(request):
 #     if "logged_user" not in request.session:
