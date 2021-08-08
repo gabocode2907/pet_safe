@@ -38,18 +38,18 @@ def login(request):
 #             return redirect('/home/')
 #     return redirect('/')
 
-# def addRole(request):
-#     # if "logged_user" not in request.session:
-#     #     messages.error(request,"There is not logged user!! Log in first!")
-#     #     return redirect('/')
-#     if request.method == "POST":
-#         Role.objects.create(rol=request.POST['role'])
-#     return redirect('/admin/')
+def addRole(request):
+    # if "logged_user" not in request.session:
+    #     messages.error(request,"There is not logged user!! Log in first!")
+    #     return redirect('/')
+    if request.method == "POST":
+        Role.objects.create(rol=request.POST['role'])
+    return redirect('/admin/')
 
-# def addGender(request):
-#     if request.method == "POST":
-#         Gender.objects.create(gender=request.POST['gender'])   
-#     return redirect('/admin/')
+def addGender(request):
+    if request.method == "POST":
+        Gender.objects.create(gender=request.POST['gender'])   
+    return redirect('/admin/')
 
 # def addEspecialidad(request):
 #     if request.method == "POST":

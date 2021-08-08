@@ -6,14 +6,16 @@ urlpatterns = [
     path('start/',views.login),
     path('register/',views.register),
     path('admin/',views.admin),
+    path('add/role/',views.addRole),
+    path('add/gender/',views.addGender),
 #     path('signin/',views.signin),
 #     path('logout/',views.logout),
 #     path('add/client/',views.addClient),
 #     path('home/',views.home),
 #     path('add/user/',views.addUser),
-#     path('add/role/',views.addRole),
+
 #     path('add/especialidad/',views.addEspecialidad),
-#     path('add/gender/',views.addGender),
+
 #     path('add/hora/',views.addHora),
 #     path('tab/type/<int:pk>',views.tabRequest),
 #     path('del_user/<int:pk>',views.deleteUser),
