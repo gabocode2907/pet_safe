@@ -18,25 +18,6 @@ class RegistrationManager(models.Manager):
             if postData['email'] == val_email.email:
                 errors['email'] = "La cuenta de correo electronico ya se encuentra en uso!!"
         except:
-            if len(postData['sfname'])==0:
-                errors['sfname'] = "Debe ingresar un nombre!!"
-            if len(postData['slname']) == 0:
-                errors['slname'] = "Debe ingresar un apellido!!"
-            if not EMAIL_REGEX.match(postData['email']):   
-                errors['email'] = "e-mail invalido!!"
-            if postData['pwd'] != postData['cpwd']:
-                    errors['cconfirm_password'] = "Las contraseñas no coinciden!!"
-            else:
-                if len(postData['pwd']) <8 or len(postData['cpwd']) <8:
-                    errors['passwords'] = "La contraseña debe ser al menos de 8 caracteres!!"
-        return errors
-    def new_client_validator(self, postData):
-        errors = {}
-        try:
-            val_email = User.objects.get(email=postData['email'])
-            if postData['email'] == val_email.email:
-                errors['email'] = "La cuenta de correo electronico ya se encuentra en uso!!"
-        except:
             if civalidator.ci_validator(postData['cedula']) == 0:
                 errors['cedula'] = "Cedula no valida, ingrese nuevamnte"
             if len(postData['direccion']) == 0:
@@ -122,6 +103,7 @@ class User(models.Model):
     password = CharField(max_length=100)
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
+    objects = RegistrationManager()
 
 class vetRecord(models.Model):
     pet_name = CharField(max_length=50)

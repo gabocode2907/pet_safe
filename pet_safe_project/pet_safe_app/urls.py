@@ -9,10 +9,10 @@ urlpatterns = [
     path('add/role/',views.addRole),
     path('add/gender/',views.addGender),
     path('add/user/',views.addUser),
-#     path('signin/',views.signin),
+    path('signin/',views.signin),
+    path('home/',views.home),
 #     path('logout/',views.logout),
-#     
-#     path('home/',views.home),
+
 #     path('add/user/',views.addUser),
 
 #     path('add/especialidad/',views.addEspecialidad),
