@@ -8,9 +8,10 @@ urlpatterns = [
     path('admin/',views.admin),
     path('add/role/',views.addRole),
     path('add/gender/',views.addGender),
+    path('add/user/',views.addUser),
 #     path('signin/',views.signin),
 #     path('logout/',views.logout),
-#     path('add/client/',views.addClient),
+#     
 #     path('home/',views.home),
 #     path('add/user/',views.addUser),
 

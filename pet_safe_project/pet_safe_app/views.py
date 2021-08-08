@@ -64,46 +64,46 @@ def addGender(request):
 #     return redirect('/admin/')
 
 def  register(request):
-    # genders = Gender.objects.all()
-    # context = {
-    #     'genders' : genders
-    # }
-    # print(context)
-    # if request.method == "POST":
-    #     errors = User.objects.new_client_validator(request.POST)
-    #     if len(errors) > 0:
-    #         for key, value in errors.items():
-    #             messages.error(request,value,extra_tags='register')
-    #         return redirect('/add/client/')
-    #     else:
-    #         password = request.POST['pwd']
-    #         pw_hash = bcrypt.hashpw(password.encode(),bcrypt.gensalt()).decode()
-    #         gender = Gender.objects.get(id=request.POST['sexo'])
-    #         Client.objects.create(fname=request.POST['fname'],lname=request.POST['lname'],cedula=request.POST['cedula'],direccion=request.POST['direccion'],hphone=request.POST['hphone'],cphone=request.POST['cphone'],sexo=gender,dob=request.POST['dob'],email=request.POST['email'],password=pw_hash)
-    #         messages.success(request, 'Usuario creado correctamente! Puede iniciar sesion!',extra_tags='success')
-    #         return redirect('/login/')
+    genders = Gender.objects.all()
+    context = {
+        'genders' : genders
+    }
+    print(context)
+    if request.method == "POST":
+        errors = User.objects.new_client_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request,value,extra_tags='register')
+            return redirect('/add/user/')
+        else:
+            password = request.POST['pwd']
+            pw_hash = bcrypt.hashpw(password.encode(),bcrypt.gensalt()).decode()
+            gender = Gender.objects.get(id=request.POST['sexo'])
+            User.objects.create(fname=request.POST['fname'],lname=request.POST['lname'],cedula=request.POST['cedula'],direccion=request.POST['direccion'],hphone=request.POST['hphone'],cphone=request.POST['cphone'],sexo=gender,dob=request.POST['dob'],email=request.POST['email'],password=pw_hash)
+            messages.success(request, 'Usuario creado correctamente! Puede iniciar sesion!',extra_tags='success')
+            return redirect('/signin/')
     return render(request,'register.html')
 
-# def addUser(request):
-#     # if "logged_user" not in request.session:
-#     #     print("QUE CHUCHA PASA? HAY SESION?")
-#     #     messages.error(request,"There is not logged user!! Log in first!")
-#     #     return redirect('/')
-#     if request.method == "POST":
-#         errors = User.objects.new_user_validator(request.POST)
-#         if len(errors) > 0:
-#             for key, value in errors.items():
-#                 messages.error(request,value,extra_tags='nuser')
-#             return redirect('/admin/')
-#         else:
-#             password = request.POST['pwd']
-#             pw_hash = bcrypt.hashpw(password.encode(),bcrypt.gensalt()).decode()
-#             rol_id = Role.objects.get(id=request.POST['role'])
-#             especialidad = Especialidad.objects.get(id=request.POST['especialidad'])
-#             User.objects.create(especialidad=especialidad,sfname=request.POST['sfname'],slname=request.POST['slname'],email=request.POST['email'],password=pw_hash,rol_id=rol_id)
-#             messages.success(request, 'Usuario creado correctamente!',extra_tags='success')
-#             return redirect('/admin/')
-#     return redirect('/admin/')
+def addUser(request):
+    # if "logged_user" not in request.session:
+    #     print("QUE CHUCHA PASA? HAY SESION?")
+    #     messages.error(request,"There is not logged user!! Log in first!")
+    #     return redirect('/')
+    if request.method == "POST":
+        errors = User.objects.new_user_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request,value,extra_tags='nuser')
+            return redirect('/admin/')
+        else:
+            password = request.POST['pwd']
+            pw_hash = bcrypt.hashpw(password.encode(),bcrypt.gensalt()).decode()
+            rol_id = Role.objects.get(id=request.POST['role'])
+            especialidad = Especialidad.objects.get(id=request.POST['especialidad'])
+            User.objects.create(especialidad=especialidad,sfname=request.POST['sfname'],slname=request.POST['slname'],email=request.POST['email'],password=pw_hash,rol_id=rol_id)
+            messages.success(request, 'Usuario creado correctamente!',extra_tags='success')
+            return redirect('/admin/')
+    return redirect('/admin/')
 
 def admin(request):
     roles = Rol.objects.all()
