@@ -62,7 +62,7 @@ def  register(request):
         'genders' : genders
     }
     print(context)
-    return render(request,'register.html',context)
+    return render(request,'index.html',context)
 
 def addUser(request):
     if "logged_user" not in request.session:
