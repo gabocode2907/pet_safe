@@ -10,10 +10,20 @@ from datetime import datetime
 from django.core.mail import send_mail
 
 def index(request):
-    return render(request,'index.html')
+    genders = Gender.objects.all()
+    context = {
+        'genders' : genders
+    }
+    return render(request,'index.html',context)
 
 def login(request):
     return render(request,'signin.html')
+
+def about(request):
+    return render(request,'about.html')
+
+def contact(request):
+    return render(request,'contact.html')
 
 def signin(request):
     if request.method == "POST":

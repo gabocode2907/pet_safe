@@ -54,8 +54,8 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<div class="w3menu navbar-left">
 							<ul class="nav navbar">
-								<li><a href="/" class="active">Home</a></li>
-								<li><a href="/about/">About</a></li>
+								<li><a href="/">Home</a></li>
+								<li><a href="/about/" class="active">About</a></li>
 								<li><a href="/contact/">Contact</a></li>
 							</ul>
 						</div>
@@ -70,137 +70,193 @@
 				</div>
 			</div>
 			<!-- //navigation -->
-	<!-- Modal1 -->
-	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-					<div class="signin-form profile">
-						<h3 class="agileinfo_sign">Sign In</h3>
-						<!-- <div class="login-form">
-							<form action="#" method="post">
-								<input type="email" name="email" placeholder="E-mail" required="">
-								<input type="password" name="password" placeholder="Password" required="">
-								<div class="tp">
-									<input type="submit" value="Sign In">
-								</div>
-							</form>
-						</div> -->
-						<div class="row">
-							<div class="col-12 d-flex justify-content-center">
-								<form class="border border-secondary p-5" action="/signin/" method="POST">
-									{% if messages %}
-										{% for message in messages %}
-											{%if "login" in message.tags %}
-										<ul>
-											<li style="color: brown;">{{message}}</li>
-										</ul>
-											{% endif %}
-										{% endfor %}
-										{% endif %}
-										{% if messages %}
-										{% for message in messages %}
-											{%if "success" in message.tags %}
-										<ul>
-											<li style="color: green;">{{message}}</li>
-										</ul>
-											{% endif %}
-										{% endfor %}
-										{% endif %}
-									{% csrf_token %}
-									<input type="hidden" name="log_type" value="ct">
-									<label class="form-label" for="email">E-mail:</label>
-									<input class="form-control" type="email" name="email" id="email"><br>
-									<label class="form-label" for="pwd">Password:</label>
-									<input class="form-control" type="password" name="pwd" id="pwd"><br>
-									<button type="submit" class="btn btn-secondary">Log-in</button>
-									<hr>
-									<label class="form-label" for="register">Don't have an account yet?</label>
-									<a class="btn btn-warning btn-sm" href="/register/" role="button">Register here</a>
-								</form>
-							</div>
-						</div>
-						<div class="login-social-grids">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-rss"></i></a></li>
-							</ul>
-						</div>
-						<p><a href="#" data-toggle="modal" data-target="#myModal3"> Don't have an account?</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //Modal1 -->
-	<!-- Modal2 -->
-	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-					<div class="signin-form profile">
-						<h3 class="agileinfo_sign">Sign Up</h3>
-						<div class="login-form">
-							<form action="#" method="post">
-								<input type="text" name="name" placeholder="Username" required="">
-								<input type="email" name="email" placeholder="Email" required="">
-								<input type="password" class="password" name="Password" id="password1" placeholder="Password" required="" />
-								<input type="password" class="password" name="Confirm Password" id="password2" placeholder="Confirm Password" required=""
-								/>
-								<input type="submit" value="Sign Up">
-							</form>
-						</div>
-						<p><a href="#"> By clicking register, I agree to your terms</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //Modal2 -->
-	<!-- about -->
-	<div class="services">
+	<!-- welcome -->
+	<div class="welcome agileits">
 		<div class="container">
-			<h3 class="agileits-title">Need More Services?</h3>
-			<div class="top_tabs_agile">
-				<div id="horizontalTab" class="top_tabs_agile">
-					<ul class="resp-tabs-list">
-						{% for pet in all_pets %}
-                        <li>
-							<i class="fa fa-paw" aria-hidden="true"></i>{{pet.pet_name}}
-						</li>
-                        {% endfor %}
-					</ul>
-					<div class="resp-tabs-container">
-                        {% for pet in all_pets %}
-						<div class="tab1">
-							<div class="services-right-agileits">
-								<h4>{{pet.pet_color}}</h4>
-								<p class="para-agileits-w3layouts">{{pet.description}}</p>
-								<a href="/mypet/{{pet.id}}" class="button button-isi"><span>Read More </span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
-							</div>
-						</div>
-                        {% endfor %}
+			<div class="welcome-w3lsrow">
+				<div class="col-md-5 col-sm-5 w3welcome-left">
+					<div class="w3welcome-text">
+						<h5 class="w3l-subtitle">Who We Are</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at placerat ante. Praesent nulla nunc, pretium dapibus
+							efficitur in, auctor eget elit. Lorem ipsum dolor sit amet</p>
+						<a href="single.html" class="button button-isi"><span>Read More</span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
 					</div>
 				</div>
+				<div class="col-md-7 col-sm-7 w3welcome-img">
+
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="welcome-w3lsrow2">
+				<div class="col-sm-3 team-grid">
+					<div class="flip-container">
+						<div class="flipper">
+							<div class="front">
+								<img src="{% static 'images/img2.jpg' %}" alt="" />
+							</div>
+							<div class="back">
+								<h4>Peter Parker</h4>
+								<p>Pet Lover</p>
+								<div class="w3l-social">
+									<ul>
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-rss"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 team-grid">
+					<div class="flip-container">
+						<div class="flipper">
+							<div class="front">
+								<img src="{% static 'images/img3.jpg' %}" alt="" />
+							</div>
+							<div class="back">
+								<h4>Steven Wilson</h4>
+								<p>Pet Lover</p>
+								<div class="w3l-social">
+									<ul>
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-rss"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 team-grid">
+					<div class="flip-container">
+						<div class="flipper">
+							<div class="front">
+								<img src="{% static 'images/img4.jpg' %}" alt="" />
+							</div>
+							<div class="back">
+								<h4>Johan Botha</h4>
+								<p>Pet Lover</p>
+								<div class="w3l-social">
+									<ul>
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-rss"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 team-grid">
+					<div class="flip-container">
+						<div class="flipper">
+							<div class="front">
+								<img src="{% static 'images/img5.jpg' %}" alt="" />
+							</div>
+							<div class="back">
+								<h4>Mary Jane</h4>
+								<p>Pet Lover</p>
+								<div class="w3l-social">
+									<ul>
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-rss"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+	<!-- //welcome -->
+	<!-- /services -->
+	<div class="agile_secives " id="services">
+		<div class="container">
+			<h3 class="agileits-title two">What we Do</h3>
+			<div class="markets-grids">
+				<div class="col-md-4 w3ls-markets-grid">
+					<div class="agileits-icon-grid">
+						<div class="icon-left">
+							<i class="fa fa-eye" aria-hidden="true"></i>
+						</div>
+						<div class="icon-right">
+							<h5>Dog Walking</h5>
+							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="col-md-4 w3ls-markets-grid">
+					<div class="agileits-icon-grid">
+						<div class="icon-left">
+							<i class="fa fa-ambulance" aria-hidden="true"></i>
+						</div>
+						<div class="icon-right">
+							<h5>Pet Grooming</h5>
+							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="col-md-4 w3ls-markets-grid">
+					<div class="agileits-icon-grid">
+						<div class="icon-left">
+							<i class="fa fa-medkit" aria-hidden="true"></i>
+						</div>
+						<div class="icon-right">
+							<h5>Pet Sitting</h5>
+							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="col-md-4 w3ls-markets-grid">
+					<div class="agileits-icon-grid">
+						<div class="icon-left">
+							<i class="fa fa-flask" aria-hidden="true"></i>
+						</div>
+						<div class="icon-right">
+							<h5>Pet Daycare</h5>
+							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="col-md-4 w3ls-markets-grid">
+					<div class="agileits-icon-grid">
+						<div class="icon-left">
+							<i class="fa fa-line-chart" aria-hidden="true"></i>
+						</div>
+						<div class="icon-right">
+							<h5>Veterinary Help</h5>
+							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="col-md-4 w3ls-markets-grid">
+					<div class="agileits-icon-grid">
+						<div class="icon-left">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+						</div>
+						<div class="icon-right">
+							<h5>Visiting Hours</h5>
+							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
 			</div>
 		</div>
 	</div>
 	<!-- //services -->
-	<!-- w3-agilesale -->
-	<div class="w3-agilesale welcome">
-		<div class="container">
-			<h3 class="agileits-title two">Pet Adoption. Be Part of Something <span>Beautiful!</span></h3>
-			<a href="contact.html" class="button button-isi"><span>Contact Us </span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
-		</div>
-	</div>
-	<!-- //w3-agilesale -->
+
 
 	<!-- text-effect -->
 	<script type="text/javascript" src="{% static 'js/jquery.transit.js' %}"></script>

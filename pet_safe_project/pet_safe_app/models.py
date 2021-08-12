@@ -118,7 +118,7 @@ class Pet(models.Model):
     pet_name = CharField(max_length=50)
     pet_age = PositiveSmallIntegerField()
     pet_birth_date = DateField()
-    pet_type = OneToOneField(PetType,on_delete=CASCADE)
+    pet_type = ForeignKey(PetType,related_name='pets',on_delete=CASCADE)
     pet_breed = CharField(max_length=50)
     pet_gender = CharField(max_length=6) 
     pet_weight = DecimalField(decimal_places=2, max_digits=5)
