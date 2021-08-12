@@ -1,15 +1,45 @@
 {% extends 'base.html' %}
 {% block content %} 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron bg-light bg-gradient">
-                <h1 class="display-4">Welcome to PetSafe</h1>
-                <hr class="my-4">
-                <p class="lead">
-                </p>
+<div class="row">
+    <div class="col-4">
+        <div class="list-group">
+            {% for pet in all_pets %}
+            <a href="/mypet/{{pet.id}}" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{pet.pet_name}}</h5>
             </div>
+            </a>
+            {% endfor %}
         </div>
+    </div>
+    <div class="col-4">
+        <a class="btn btn-secondary btn-lg" href="/add/pet/" role="button">Register Pet</a><br><br>
+    </div>
+    <div class="col-4">
+        <a class="btn btn-secondary btn-lg" href="/list/clinic/" role="button">View Vets</a><br><br>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-6">
+        <h2>Lost Pets</h2>
+        <div class="list-group">
+            {% for pet in all_pets %}
+                {% if pet.is_lost == 1 %}
+            <a href="/mypet/{{pet.id}}" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{pet.pet_name}}</h5>
+            </div>
+            </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-danger btn-lg" href="/found/" role="button">PET FOUND</a>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+                <h3>Here you can edit your personal information and Security Settings</h3>
+                <hr>
+                </p>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <form class="border border-secondary p-5" action="/edit/user/" method="POST">
+                <input type="hidden" value="update" name="is_edit">
+                {% if messages %}
+                    {% for message in messages %}
+                        {%if "edituser" in message.tags %}
+                    <ul>
+                        <li style="color: brown;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                        {%if "success" in message.tags %}
+                    <ul>
+                        <li style="color: green;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                {% csrf_token %}
+                <label class="form-label" for="fname">Name:</label>
+                <input class="form-control" name="fname" value="{{ user_to_edit.fname }}" type="text">
+                <label class="form-label" for="lname">Last Name:</label>
+                <input class="form-control" name="lname" value="{{ user_to_edit.lname }}" type="text">
+                <label class="form-label" for="direccion">Address:</label>
+                <input class="form-control" name="direccion" value="{{ user_to_edit.direccion }}" maxlength="100" type="text">
+                <label class="form-label" for="hphone">Home Phone:</label>
+                <input class="form-control" name="hphone" value="{{ user_to_edit.hphone }}" maxlength="10" type="text">
+                <label class="form-label" for="cphone">Cell Phone:</label>
+                <input class="form-control" name="cphone" value="0{{ user_to_edit.cphone }}" maxlength="10" type="text">
+                <label class="form-label" for="sexo">Gender:</label>
+                <select class="form-control" name="sexo" id="sexo">
+                    {% for gender in genders %}
+                    <option value="{{gender.id}}">{{gender.gender}}</option>
+                    {% endfor %}
+                </select>
+                <label class="form-label" for="dob">Date of Birth:</label>
+                <input class="form-control" name="dob" value="{{ up_date }}" maxlength="10" type="date">
+                <label class="form-label" for="email">E-mail:</label>
+                <input class="form-control" type="email" value="{{ user_to_edit.email }}" name="email" id="email"><br>
+                <button type="submit" class="btn btn-secondary>Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

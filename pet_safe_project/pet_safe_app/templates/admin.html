@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
 {% block content %} 
-<div class="container">
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
             <h1>Consola de Administracion</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 d-flex justify-content-center position-relative">
+        <div class="col-6 d-flex justify-content-center">
+            <form class="border border-success p-5" action="/add/clinic/" method="POST">
+                <h4>Register new clinic</h4>
+                {% if messages %}
+                    {% for message in messages %}
+                        {%if "register" in message.tags %}
+                    <ul>
+                        <li style="color: brown;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                        {%if "success" in message.tags %}
+                    <ul>
+                        <li style="color: green;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                {% csrf_token %}
+                <label class="form-label" for="clinic_name">Name:</label>
+                <input class="form-control" name="clinic_name" type="text">
+                <label class="form-label" for="clinic_address">Address:</label>
+                <input class="form-control" name="clinic_address" maxlength="100" type="text">
+                <label class="form-label" for="clinic_hphone">Office Phone:</label>
+                <input class="form-control" name="clinic_hphone" maxlength="10" type="text">
+                <label class="form-label" for="clinic_cphone">Cell Phone:</label>
+                <input class="form-control" name="clinic_cphone" maxlength="10" type="text">
+                <label class="form-label" for="clinic_email">E-mail:</label>
+                <input class="form-control" type="email" name="clinic_email" id="email">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        <div class="col-6 d-flex justify-content-center position-relative">
             <div class="position-absolute top-0">
                 <form class="border border-success p-5" action="/add/role/" method="POST" style="height: 280px;">
                     <h4>Roles</h4>
@@ -25,8 +55,14 @@
                     <button type="submit" class="btn btn-success">Insertar</button>
                 </form>
                 <hr>
+                <form class="border border-success p-5" action="/add/type/" method="POST" style="height: 280px;">
+                    <h4>Tipo de Mascota</h4>
+                    {% csrf_token %} 
+                    <label class="form-label" for="pet_type">Tipo:</label>
+                    <input class="form-control" name="pet_type" type="text"><br>
+                    <button type="submit" class="btn btn-success">Insertar</button>
+                </form>
             </div>
         </div>
-    </div>
-</div>
+    </div>  
 {% endblock %}

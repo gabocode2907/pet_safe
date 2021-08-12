@@ -11,7 +11,9 @@
     </title>
 </head>
 <body>
-    {# {% include 'navbar.html' %} #}
+    {% if logged_user %}
+    {% include 'navbar.html' %} 
+    {% endif %}
     <br>
     <div class="container">
     {% block content %}

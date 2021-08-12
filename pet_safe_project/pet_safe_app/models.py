@@ -10,6 +10,24 @@ from pet_safe_app import civalidator
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.+_-]+\.[a-zA-Z]+$') #e-mail validations
 
+class ClinicValidator(models.Manager):
+    def newClinic_validator(self, postData):
+        clinic_errors = {}
+        try:
+            val_email = Clinic.objects.get(clinic_email=postData['clinic_email'])
+            if postData['clinic_email'] == val_email.clinic_email:
+                clinic_errors['clinic_email'] = "La cuenta de correo electronico ya se encuentra en uso!!"
+        except:
+            if len(postData['clinic_address']) == 0:
+                clinic_errors['clinic_address'] = "Debe ingresar una direccion!"
+            elif len(postData['clinic_name']) == 0:
+                clinic_errors['clinic_name'] = "Debe ingresar un nombre!!"
+            elif not EMAIL_REGEX.match(postData['clinic_email']):   
+                clinic_errors['clinic_email'] = "e-mail invalido!!"
+            else:
+                pass
+        return clinic_errors
+
 class RegistrationManager(models.Manager):
     def new_user_validator(self, postData):
         errors = {}
@@ -34,6 +52,17 @@ class RegistrationManager(models.Manager):
                 if len(postData['pwd']) <8 or len(postData['cpwd']) <8:
                     errors['passwords'] = "La contraseña debe ser al menos de 8 caracteres!!"
         return errors
+    def update_validator(self, postData):
+        errors = {}
+        if len(postData['direccion']) == 0:
+            errors['direccion'] = "Debe ingresar una direccion!"
+        if len(postData['fname']) == 0:
+            errors['fname'] = "Debe ingresar un nombre!!"
+        if len(postData['lname']) == 0:
+            errors['lname'] = "Debe ingresar un apellido!!"
+        if not EMAIL_REGEX.match(postData['email']):   
+            errors['email'] = "e-mail invalido!!"
+        return errors
     def login_validator(self, postData):
         login_errors = {}
         try:
@@ -46,26 +75,6 @@ class RegistrationManager(models.Manager):
         except:
             login_errors['not_user'] = "User not registered, please register first!!"
         return login_errors
-
-class PetValidator(models.Manager):
-    def appointment_validator(self, postData):
-        appointment_errors = {}
-        current_date = date.today()
-        if len(postData['task']) == 0:
-                appointment_errors['task'] = "You must enter a Task Name!!"
-        if postData['date'] < current_date.strftime("%Y-%m-%d"):
-                appointment_errors['date'] = "An appointment date cannot be in the past!!"
-        return appointment_errors
-
-class ClinicValidator(models.Manager):
-    def appointment_validator(self, postData):
-        appointment_errors = {}
-        current_date = date.today()
-        if len(postData['task']) == 0:
-                appointment_errors['task'] = "You must enter a Task Name!!"
-        if postData['date'] < current_date.strftime("%Y-%m-%d"):
-                appointment_errors['date'] = "An appointment date cannot be in the past!!"
-        return appointment_errors
 
 class Rol(models.Model):
     rol = CharField(max_length=50)
@@ -118,10 +127,9 @@ class Pet(models.Model):
     is_lost = SmallIntegerField()
     pet_image = ImageField(upload_to='pet_image/')
     pet_owner = ForeignKey(User, related_name='pets_owner', on_delete=CASCADE)
-    vaccines = ForeignKey(Vaccine, related_name="pet_vaccines",on_delete=CASCADE)
+    vaccines = ForeignKey(Vaccine, related_name="pet_vaccines",on_delete=CASCADE,null=True)
     created_at = DateField(auto_now_add=True)
     updated_at = DateField(auto_now=True)
-    objects = PetValidator()
 
 class Clinic(models.Model):
     clinic_name = CharField(max_length=50)

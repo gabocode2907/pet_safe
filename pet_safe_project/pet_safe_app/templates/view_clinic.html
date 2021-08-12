@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+<div class="col-6">
+    <label class="form-label" for="clinic_name">Nombre:</label>
+    <input class="form-control" type="text" disabled value="{{clinic.clinic_name}}">
+    <label class="form-label" for="clinic_name">Direccion:</label>
+    <input class="form-control" type="text" disabled value="{{clinic.clinic_address}}">
+    <label class="form-label" for="clinic_name">Telefono Fijo:</label>
+    <input class="form-control" type="text" disabled value="{{clinic.clinic_hphone}}">
+    <label class="form-label" for="clinic_name">Telefono Celular:</label>
+    <input class="form-control" type="text" disabled value="{{clinic.clinic_cphone}}">
+    <label class="form-label" for="clinic_name">e-mail:</label>
+    <input class="form-control" type="text" disabled value="{{clinic.clinic_email}}">
+
+</div>
+<div class="col-6">
+
+</div>
+</div>
+{% endblock %}

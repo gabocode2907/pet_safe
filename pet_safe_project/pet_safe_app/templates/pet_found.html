@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-6 d-flex justify-content-center">
+            <div class="border border-success p-5" >
+                <h4>Pet Card</h4>
+                <img src="/{{ my_pet.pet_image }}" alt="Imagen de la mascota">
+                <br><br>
+                <label class="form-label" for="pet_name">Pet Name:</label>
+                <h3 class="form-control">{{ my_pet.pet_name }}</h3>
+                <label class="form-label" for="pet_age">Pet Age [Human Years]:</label>
+                <h3 class="form-control">{{ my_pet.pet_age }}</h3>
+                <label class="form-label" for="description">Description:</label>
+                <h3 class="form-control">{{ my_pet.description }}</h3>
+            </div>
+        </div>
+        <div class="col-6 d-flex justify-content-center">
+            <div class="border border-success p-5" >
+                <h4>Pet Owner</h4>
+                <label class="form-label" for="pet_name">Owner Name:</label>
+                <h3 class="form-control">{{ pet_owner.fname }} {{ pet_owner.lname }}</h3>
+                <label class="form-label" for="pet_age">Phone Numbers:</label>
+                <h3 class="form-control">{{ pet_owner.hphone }} / {{ pet_owner.cphone }}</h3>
+                <label class="form-label" for="description">E-mail:</label>
+                <h3 class="form-control">{{ pet_owner.email }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

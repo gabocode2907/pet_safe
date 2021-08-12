@@ -14,7 +14,7 @@
     <hr>
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-            <form class="border border-primary p-5" action="/signin/" method="POST">
+            <form class="border border-secondary p-5" action="/signin/" method="POST">
                 {% if messages %}
                     {% for message in messages %}
                         {%if "login" in message.tags %}
@@ -39,10 +39,10 @@
                 <input class="form-control" type="email" name="email" id="email"><br>
                 <label class="form-label" for="pwd">Password:</label>
                 <input class="form-control" type="password" name="pwd" id="pwd"><br>
-                <button type="submit" class="btn btn-primary">Log-in</button>
+                <button type="submit" class="btn btn-secondary">Log-in</button>
                 <hr>
                 <label class="form-label" for="register">Don't have an account yet?</label>
-                <a class="btn btn-primary btn-sm" href="/register/" role="button">Register here</a>
+                <a class="btn btn-warning btn-sm" href="/register/" role="button">Register here</a>
             </form>
         </div>
     </div>

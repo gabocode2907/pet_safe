@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="border border-success p-5" >
+                <h4>Pet Card</h4>
+                {% if messages %}
+                    {% for message in messages %}
+                        {%if "register" in message.tags %}
+                    <ul>
+                        <li style="color: brown;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                        {%if "success" in message.tags %}
+                    <ul>
+                        <li style="color: green;">{{message}}</li>
+                    </ul>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                {% csrf_token %}
+
+                <img src="/{{ my_pet.pet_image }}" alt="Imagen de la mascota">
+                <br><br>
+
+                <label class="form-label" for="pet_name">Pet Name:</label>
+                <h3 class="form-control">{{ my_pet.pet_name }}</h3>
+                
+                <label class="form-label" for="pet_age">Pet Age [Human Years]:</label>
+                <h3 class="form-control">{{ my_pet.pet_age }}</h3>
+
+                <label class="form-label" for="pet_birth_date">Birth Day:</label>
+                <h3 class="form-control">{{ my_pet.pet_birth_date }}</h3>
+
+                <label class="form-label" for="pet_type">Pet Type:</label>
+                <h3 class="form-control">{{ my_pet.pet_type.specie }}</h3>
+
+                <label class="form-label" for="pet_breed">Breed:</label>
+                <h3 class="form-control">{{ my_pet.pet_breed }}</h3>
+
+                <label class="form-label" for="pet_gender">Gender:</label>
+                <h3 class="form-control">{{ my_pet.pet_gender }}</h3>
+
+                <label class="form-label" for="pet_weight">Weight [kg]:</label>
+                <h3 class="form-control">{{ my_pet.pet_weight }}</h3>
+
+                <label class="form-label" for="pet_color">Color:</label>
+                <h3 class="form-control">{{ my_pet.pet_color }}</h3>
+
+                <label class="form-label" for="description">Description:</label>
+                <h3 class="form-control">{{ my_pet.description }}</h3>
+
+                <!-- <label class="form-label" for="is_lost">Lost:</label>
+                <input class="form-control" name="is_lost" type="Text"></input> -->
+                
+                <!-- <label class="form-label" for="pet_owner">Pet Owner:</label>
+                <input class="form-control" name="pet_owner" type="Text"></input> -->
+
+                <!-- <label class="form-label" for="vaccines">Vaccines:</label>
+                <input class="form-control" name="vaccines" type="Text"></input> -->
+
+                <br><br>
+                <a type="submit" href="/report/{{ my_pet.id }}/" class="btn btn-primary">Reportar Perdido</a>
+                <!-- <a type="submit" class="btn btn-primary">Ver Ficha Médica</a> -->
+                <a type="submit" class="btn btn-primary">Agregar Vacuna</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
