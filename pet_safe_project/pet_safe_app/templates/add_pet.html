@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-            <form class="border border-success p-5" action="/add/petUser/" method="POST">
+            <form class="border border-success p-5" action="/add/petUser/" method="POST" enctype="multipart/form-data">
                 <h4>New Pet</h4>
                 {% if messages %}
                     {% for message in messages %}
@@ -73,7 +73,8 @@
                 <br>
                 <label class="form-label" for="pet_image">Select your Pet Photo:</label>
                 <br>
-                <input  type="file" name="pet_image" id="pet_image" accept="image/*">
+                {{ pet_image.as_p }}
+                <!-- <input  type="file" name="pet_image" id="pet_image" accept="image/*" required> -->
                 <!-- <input class="form-control" type="submit" value="Upload Image" name="submit"> -->
 
                 <br><br>

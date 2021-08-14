@@ -1,7 +1,6 @@
 from .models import  Pet, User,Rol,Gender,PetType,Clinic
-from django.http import JsonResponse
+from .forms import PetImageForm
 from django.shortcuts import redirect, render
-from django.urls.conf import include
 from django.contrib import messages
 import bcrypt
 from datetime import date
@@ -207,12 +206,14 @@ def addPet(request):
     if "logged_user" not in request.session:
         messages.error(request,"There is not logged user!! Log in first!")
         return redirect('/')
-
+    
+    logged_user = User.objects.get(id=request.session['logged_user'])
+    pet_img_form = PetImageForm(data=request.GET)
     context = {
-        'logged_user': User.objects.get(id=request.session['logged_user']),
-        'all_petType': PetType.objects.all()
+        'logged_user': logged_user,
+        'all_petType': PetType.objects.all(),
+        'pet_image': pet_img_form
     }
-
     return render(request,'add_pet.html',context)
 #=====================================================================
 
@@ -222,7 +223,6 @@ def addPetUser(request):
     if "logged_user" not in request.session:
         messages.error(request,"There is not logged user!! Log in first!")
         return redirect('/')
-    
     
     user = User.objects.get(id=request.session['logged_user'])
     pet_name = request.POST.get("pet_name")
@@ -235,8 +235,14 @@ def addPetUser(request):
     pet_color = request.POST.get("pet_color")
     description = request.POST.get("description")
     is_lost = request.POST.get("is_lost")
-    pet_image = request.POST.get("pet_image")
+    #pet_image = request.POST.get("pet_image")
     pet_owner = User.objects.get(id=request.session['logged_user'])
+
+    pet_image = PetImageForm(data=request.POST)
+    pet_image.save(commit=False)
+    pet_image.pet_owner = pet_owner
+    pet_image.save()
+    print("**********************", pet_image)
     # vaccines = request.POST.get("vaccines")
 
 
@@ -268,9 +274,9 @@ def addPetUser(request):
         messages.error(request, 'Please insert a short description of your pet')
         return redirect('/add/pet/')
 
-    if len(pet_image) <1:
-        messages.error(request, 'Please upload your Pet Photo')
-        return redirect('/add/pet/')
+    #if len(pet_image) <1:
+    #    messages.error(request, 'Please upload your Pet Photo')
+    #    return redirect('/add/pet/')
     
     # if len(vaccines) <1:
     #     messages.error(request, 'Please insert vaccines applied to your Pet')
@@ -306,8 +312,6 @@ def addPetUser(request):
     print('\n\n**************\nFunción Cumplida\n\n**************')
     return redirect('/home/')
 #=====================================================================
-
-
 
 #================= Alexis / My Pet ===================================
 def mypet(request, pet_id):
