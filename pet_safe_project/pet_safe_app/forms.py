@@ -6,6 +6,7 @@ from .models import Pet
 class PetImageForm(forms.ModelForm):
     class Meta:
         model = Pet 
+        # fields = ('pet_name','pet_age','pet_birth_date','pet_type','pet_breed','pet_gender','pet_weight','pet_color','description','pet_image',)
         fields = ('pet_image',)
     #save the current model instance to the database and return the object
     #def save(self, commit=True):

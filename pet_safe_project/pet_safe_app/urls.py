@@ -17,6 +17,7 @@ urlpatterns = [
     path('edit/user/',views.editUser),
     path('logout/',views.logout),
     path('report/<int:pk>/',views.reportPet),
+    path('isback/<int:pk>/',views.isBack),
     path('found/',views.foundPet),
     path('found/pet/',views.foundPet),
     path('add/pet/',views.addPet),
@@ -26,4 +27,6 @@ urlpatterns = [
     path('clinic/form/', views.clinicForm),
     path('list/clinic/', views.listClinics),
     path('view/<int:pk>',views.viewClinic),
+    path('add/vaccine/<int:pk>/', views.addVaccine),
+    path('new/vaccine/<int:pk>/', views.addVaccine)
 ]

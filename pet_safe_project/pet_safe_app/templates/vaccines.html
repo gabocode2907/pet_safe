@@ -46,58 +46,26 @@
 <!-- single -->
 	<div class="single welcome">
 		<div class="container">
-			<h3 class="agileits-title">{{my_pet.pet_name}}</h3>
+			<h3 class="agileits-title">{{pet_to_vaccine.pet_name}}</h3>
 			<div class="markets-grids">
-				<div class="col-md-7 w3ls_single_left">
+				<div class="col-md-4 w3ls_single_left">
 					<div class="w3ls_single_left_grid">
 						<div class="w3ls_single_left_grid_right">
-							<h3>Date of Birth:</h3>
-							<h5>{{my_pet.pet_birth_date}}</h5>
-							<h4>Owner: {{my_pet.pet_owner.fname}} {{my_pet.pet_owner.lname}}</h4>
-							<h4>Phone Number: 0{{my_pet.pet_owner.cphone}}</h4>
+							<h3>Vaccine Information:</h3>
+                            <form action="/new/vaccine/{{pet_to_vaccine.id}}/" method="POST">
+                                {% csrf_token %}
+                                <label class="form-label" for="vaccine_name">Vaccine:</label>
+								<input class="form-control" type="text" name="vaccine_name" id="vaccine_name"><br>
+                                <label class="form-label" for="vaccine_date">Date Administered:</label>
+								<input class="form-control" type="date" name="vaccine_date" id="vaccine_date"><br>
+                                <label class="form-label" for="vaccine_next_date">Next Dose:</label>
+								<input class="form-control" type="date" name="vaccine_next_date" id="vaccine_next_date"><br>
+                                <button class="button button-isi" type="submit">Add Vaccine</button>
+                            </form>
 						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="w3ls_single_left_grid1">
-						<img src="{{ my_pet.pet_image.url }}" alt=" " class="img-responsive" />
-						<p style="text-align: justify;">{{my_pet.description}}</p>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				{% if logged_user.id == my_pet.pet_owner.id %}
-				<div class="col-md-5 w3ls_single_right">
-					<div class="wthree_recent">
-						<h4>Recent Vaccines</h4>
-						<ul>
-							{% for vaccines in pet_vaccines %}
-							<li><i class="fa fa-check" aria-hidden="true"></i>{{ vaccines.vaccine_name }}<span><i class="fa fa-calendar" aria-hidden="true"></i>Date Administered: {{ vaccines.vaccine_date }}</span><br><span><i class="fa fa-calendar" aria-hidden="true"></i>Next Dose: {{ vaccines.vaccine_next_date }}</span></li>
-							{% endfor %}
-						</ul>
-						<a href="/add/vaccine/{{my_pet.id}}" class="button button-isi"><span>Add Vaccine Record</span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
-					</div>
-				</div>
-				{% endif %}
-				<div class="clearfix"> </div>
-			</div>
-			<div class="agile_tags_cate">
-				<div class="col-md-4 agile_cat_grid">
-					<h4>More Info:</h4>
-					<div class="agile_cat_grid_tags">
-						<ul>
-							<li>Weight: {{my_pet.pet_weight}} Kilos</li>
-							<li>Breed: {{my_pet.pet_breed}}</li>
-							<li>Gender: {{my_pet.pet_gender}}</li>
-							<li>Color: {{my_pet.pet_color}}</li>
-						</ul>
-					</div>
-				</div>
-				{% if logged_user.id == my_pet.pet_owner.id %}
-				<div class="col-md-4 agile_cat_grid">
-					<h4><a style="text-decoration: none;" href="/report/{{my_pet.id}}">REPORTAR COMO PERDIDO</a></h4>
-				</div>
-				<div class="col-md-4 agile_cat_grid">
-					<h4><a href="/isback/{{my_pet.id}}">REPORTAR COMO ENCONTRADO</a></h4>
-				</div>
-				{% endif %}
 				<div class="clearfix"> </div>
 			</div>
 		</div>

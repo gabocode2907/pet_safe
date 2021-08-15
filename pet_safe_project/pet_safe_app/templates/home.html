@@ -38,136 +38,11 @@
 </head>
 
 <body>
-			<!-- navigation -->
-			<div class="top-nav w3-agiletop">
-				<div class="agile_inner_nav_w3ls">
-					<div class="navbar-header w3llogo">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<h1><a href="index.html">Pets Care</a></h1>
-					</div>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<div class="w3menu navbar-left">
-							<ul class="nav navbar">
-								<li><a href="/" class="active">Home</a></li>
-								<li><a href="/about/">About</a></li>
-								<li><a href="/contact/">Contact</a></li>
-							</ul>
-						</div>
-						<div class="w3ls-bnr-icons social-icon navbar-right">
-							<a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-							<a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-							<a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a>
-							<a href="#" class="social-button dribbble"><i class="fa fa-dribbble"></i></a>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
-			<!-- //navigation -->
-	<!-- Modal1 -->
-	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-					<div class="signin-form profile">
-						<h3 class="agileinfo_sign">Sign In</h3>
-						<!-- <div class="login-form">
-							<form action="#" method="post">
-								<input type="email" name="email" placeholder="E-mail" required="">
-								<input type="password" name="password" placeholder="Password" required="">
-								<div class="tp">
-									<input type="submit" value="Sign In">
-								</div>
-							</form>
-						</div> -->
-						<div class="row">
-							<div class="col-12 d-flex justify-content-center">
-								<form class="border border-secondary p-5" action="/signin/" method="POST">
-									{% if messages %}
-										{% for message in messages %}
-											{%if "login" in message.tags %}
-										<ul>
-											<li style="color: brown;">{{message}}</li>
-										</ul>
-											{% endif %}
-										{% endfor %}
-										{% endif %}
-										{% if messages %}
-										{% for message in messages %}
-											{%if "success" in message.tags %}
-										<ul>
-											<li style="color: green;">{{message}}</li>
-										</ul>
-											{% endif %}
-										{% endfor %}
-										{% endif %}
-									{% csrf_token %}
-									<input type="hidden" name="log_type" value="ct">
-									<label class="form-label" for="email">E-mail:</label>
-									<input class="form-control" type="email" name="email" id="email"><br>
-									<label class="form-label" for="pwd">Password:</label>
-									<input class="form-control" type="password" name="pwd" id="pwd"><br>
-									<button type="submit" class="btn btn-secondary">Log-in</button>
-									<hr>
-									<label class="form-label" for="register">Don't have an account yet?</label>
-									<a class="btn btn-warning btn-sm" href="/register/" role="button">Register here</a>
-								</form>
-							</div>
-						</div>
-						<div class="login-social-grids">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-rss"></i></a></li>
-							</ul>
-						</div>
-						<p><a href="#" data-toggle="modal" data-target="#myModal3"> Don't have an account?</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //Modal1 -->
-	<!-- Modal2 -->
-	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-					<div class="signin-form profile">
-						<h3 class="agileinfo_sign">Sign Up</h3>
-						<div class="login-form">
-							<form action="#" method="post">
-								<input type="text" name="name" placeholder="Username" required="">
-								<input type="email" name="email" placeholder="Email" required="">
-								<input type="password" class="password" name="Password" id="password1" placeholder="Password" required="" />
-								<input type="password" class="password" name="Confirm Password" id="password2" placeholder="Confirm Password" required=""
-								/>
-								<input type="submit" value="Sign Up">
-							</form>
-						</div>
-						<p><a href="#"> By clicking register, I agree to your terms</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //Modal2 -->
-	<!-- about -->
+	{% include 'navbar.html' %}
 	<div class="services">
 		<div class="container">
-			<h3 class="agileits-title">Need More Services?</h3>
+			<h3 class="agileits-title">Welcome {{logged_user.fname}}</h3>
+			<a href="/add/pet/" class="button button-isi"><span>Add a Pet</span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
 			<div class="top_tabs_agile">
 				<div id="horizontalTab" class="top_tabs_agile">
 					<ul class="resp-tabs-list">
@@ -181,9 +56,8 @@
                         {% for pet in all_pets %}
 						<div class="tab1">
 							<div class="services-right-agileits">
-								<h4>{{pet.pet_color}}</h4>
+								<img style="width: 390px; width: auto;" src="{{ pet.pet_image.url }}" alt="">
 								<p class="para-agileits-w3layouts">{{pet.description}}</p>
-								<img src="{{ pet.pet_image.url }}" alt="">
 								<a href="/mypet/{{pet.id}}" class="button button-isi"><span>Read More </span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
 							</div>
 						</div>
@@ -193,16 +67,30 @@
 			</div>
 		</div>
 	</div>
-	<!-- //services -->
-	<!-- w3-agilesale -->
 	<div class="w3-agilesale welcome">
 		<div class="container">
-			<h3 class="agileits-title two">Pet Adoption. Be Part of Something <span>Beautiful!</span></h3>
-			<a href="contact.html" class="button button-isi"><span>Contact Us </span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
+			<a href="/found/" class="button button-isi"><span>I FOUND A PET</span><i class="icon glyphicon glyphicon-arrow-right"></i></a>	
+			<div class="row">
+				<div class="col-md-4">
+					<h1 style="background-color: white;">Lost Pets</h1>
+					<div class="list-group">
+						{% for pet in lost_pets %}
+						<a href="/mypet/{{pet.id}}" class="list-group-item list-group-item-action" aria-current="true">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">{{pet.pet_name}}</h5>
+						</div>
+						</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!-- //w3-agilesale -->
-
+	<div class="copy-w3right">
+		<div class="container">
+			<p>© 2021Pet Safe. All Rights Reserved</p>
+		</div>
+	</div>
 	<!-- text-effect -->
 	<script type="text/javascript" src="{% static 'js/jquery.transit.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/jquery.textFx.js' %}"></script>

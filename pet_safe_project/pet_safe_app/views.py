@@ -1,12 +1,14 @@
-from .models import  Pet, User,Rol,Gender,PetType,Clinic
-from .forms import PetImageForm
+from .models import  Pet, User,Rol,Gender,PetType,Clinic, Vaccine
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
+from django.urls.conf import include
 from django.contrib import messages
 import bcrypt
 from datetime import date
 from pprint import pp, pprint
 from datetime import datetime
 from django.core.mail import send_mail
+from .forms import PetImageForm
 
 def index(request):
     genders = Gender.objects.all()
@@ -61,13 +63,11 @@ def  register(request):
         'genders' : genders
     }
     print(context)
-    return render(request,'index.html',context)
+    return render(request,'register.html',context)
 
 def addUser(request):
-    if "logged_user" not in request.session:
-        messages.error(request,"There is not logged user!! Log in first!")
-        return redirect('/signin/')
     if request.method == "POST":
+        print("ENTRA O NO?")
         errors = User.objects.new_user_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
@@ -80,20 +80,20 @@ def addUser(request):
             rol = Rol.objects.get(id='2')
             User.objects.create(fname=request.POST['fname'],lname=request.POST['lname'],cedula=request.POST['cedula'],direccion=request.POST['direccion'],hphone=request.POST['hphone'],cphone=request.POST['cphone'],rol=rol,sexo=gender,dob=request.POST['dob'],email=request.POST['email'],password=pw_hash)
             messages.success(request, 'Usuario creado correctamente!',extra_tags='success')
-            return redirect('/register/')
-    return redirect('/register/')
+            return redirect('/')
+    return redirect('/')
 
 def admin(request):
-    if "logged_user" not in request.session:
-        messages.error(request,"There is not logged user!! Log in first!")
-        return redirect('/signin/')
+    # if "logged_user" not in request.session:
+    #     messages.error(request,"There is not logged user!! Log in first!")
+    #     return redirect('/signin/')
     roles = Rol.objects.all()
     users = User.objects.all()
-    logged_user = User.objects.get(id=request.session['logged_user'])
+    # logged_user = User.objects.get(id=request.session['logged_user'])
     context = {
         'roles' : roles,
         'users' : users,
-        'logged_user' : logged_user
+        # 'logged_user' : logged_user
     }
     return render(request,'admin.html',context)
 
@@ -109,9 +109,11 @@ def home(request):
             return redirect('/signin/')
     logged_user = User.objects.get(id=request.session['logged_user'])
     all_pets = Pet.objects.filter(pet_owner=logged_user)
+    lost_pets = Pet.objects.filter(is_lost = 1)
     context = {
         'logged_user' : logged_user,
-        'all_pets' : all_pets
+        'all_pets' : all_pets,
+        'lost_pets' : lost_pets
     }   
     return render(request,'home.html',context)
 
@@ -167,6 +169,15 @@ def reportPet(request,pk):
     lost_pet.save()
     return redirect('/home/')
 
+def isBack(request,pk):
+    if "logged_user" not in request.session:
+        messages.error(request,"There is not logged user!! Log in first!")
+        return redirect('/signin/')
+    lost_pet = Pet.objects.get(id=pk)
+    lost_pet.is_lost = 0
+    lost_pet.save()
+    return redirect('/home/')
+
 def foundPet(request):
     if "logged_user" not in request.session:
         messages.error(request,"There is not logged user!! Log in first!")
@@ -187,14 +198,7 @@ def foundPet(request):
             [pet_owner.email],
             fail_silently=False,
         )
-        # send_mail(
-        #     'WE FOUND YOUR PET!!',
-        #     'Your pet has been found by: ',
-        #     'petsafe@med-import.com',
-        #     ['gabriel2907@hotmail.com'],
-        #     fail_silently=False,
-        # )
-        return render(request,'pet_found.html',context)
+        return render(request,'single_found.html',context)
     logged_user = User.objects.get(id=request.session['logged_user'])
     context = {
         'logged_user' : logged_user
@@ -206,14 +210,13 @@ def addPet(request):
     if "logged_user" not in request.session:
         messages.error(request,"There is not logged user!! Log in first!")
         return redirect('/')
-    
-    logged_user = User.objects.get(id=request.session['logged_user'])
     pet_img_form = PetImageForm()
     context = {
-        'logged_user': logged_user,
+        'logged_user': User.objects.get(id=request.session['logged_user']),
         'all_petType': PetType.objects.all(),
         'pet_image': pet_img_form
     }
+
     return render(request,'add_pet.html',context)
 #=====================================================================
 
@@ -226,7 +229,6 @@ def addPetUser(request):
     
     user = User.objects.get(id=request.session['logged_user'])
     pet_name = request.POST.get("pet_name")
-    # pet_age = request.POST.get("pet_age")
     pet_birth_date = request.POST.get("pet_birth_date")
     pet_type = PetType.objects.get(id=request.POST.get("pet_type"))
     pet_breed = request.POST.get("pet_breed")
@@ -235,20 +237,14 @@ def addPetUser(request):
     pet_color = request.POST.get("pet_color")
     description = request.POST.get("description")
     is_lost = request.POST.get("is_lost")
-    pet_image = request.POST.get("pet_image")
+    pet_image = 'pet_image/'+ request.POST.get("pet_image")
+    print(pet_image)
     pet_owner = User.objects.get(id=request.session['logged_user'])
-
-
-    # vaccines = request.POST.get("vaccines")
 
 
     if len(pet_name) <2:
         messages.error(request, 'Your Pet Name must be at least 2 characters')
         return redirect('/add/pet/')
-
-    # if len(pet_age) <1:
-    #     messages.error(request, 'Please insert your Pet Age')
-    #     return redirect('/add/pet/')
 
     if len(pet_birth_date ) <1:
         messages.error(request, 'Please insert your Pet Birth Day')
@@ -270,14 +266,9 @@ def addPetUser(request):
         messages.error(request, 'Please insert a short description of your pet')
         return redirect('/add/pet/')
 
-    #if len(pet_image) <1:
-    #    messages.error(request, 'Please upload your Pet Photo')
-    #    return redirect('/add/pet/')
-    
-    # if len(vaccines) <1:
-    #     messages.error(request, 'Please insert vaccines applied to your Pet')
+    # if not pet_image:
+    #     messages.error(request, 'Please upload your Pet Photo')
     #     return redirect('/add/pet/')
-
 
     fecha_dt = datetime.strptime(pet_birth_date, '%Y-%m-%d')
     def calculate_age(born):
@@ -289,8 +280,6 @@ def addPetUser(request):
 
     vaccines = '' # Realizar en tabla de las vacunas
     is_lost = 0 # Si es cero mascota recién creada y NO PERDIDA, si es 1 para mascota perdida
-
-
 
     Pet.objects.create(
         pet_name = pet_name,
@@ -307,18 +296,16 @@ def addPetUser(request):
         pet_owner = pet_owner,
         # vaccines = vaccines # Revisar
         )
-        
-    if request.method == 'POST':
-        img_form = PetImageForm(request.POST, request.FILES)
-        if img_form.is_valid():
-            instance = img_form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            print('###########################',instance)
-            
+    # img_form = PetImageForm(request.POST,request.FILES)
+    # if img_form.is_valid():
+    #     instance = img_form.save(commit=False)
+    #     instance.user = request.user
+    #     instance.save()
     print('\n\n**************\nFunción Cumplida\n\n**************')
     return redirect('/home/')
 #=====================================================================
+
+
 
 #================= Alexis / My Pet ===================================
 def mypet(request, pet_id):
@@ -328,10 +315,11 @@ def mypet(request, pet_id):
 
     context = {
         'logged_user': User.objects.get(id=request.session['logged_user']),
+        'pet_vaccines' : Vaccine.objects.filter(pet_id=Pet.objects.get(id=pet_id)),
         'my_pet': Pet.objects.get(id=pet_id)
     }
 
-    return render(request,'mypet.html',context)
+    return render(request,'single.html',context)
 #=====================================================================
 
 ################## MARCELO #############################3
@@ -380,3 +368,16 @@ def viewClinic(request,pk):
     }
     return render(request, 'view_clinic.html',context) 
 ######################## MARCELO  #########################################################
+
+def addVaccine(request,pk):
+    if request.method == "POST":
+        vaccinated_pet = Vaccine.objects.create(vaccine_name=request.POST['vaccine_name'],vaccine_date=request.POST['vaccine_date'],vaccine_next_date=request.POST['vaccine_next_date'],pet_id=Pet.objects.get(id=pk))
+        context = {
+            'vaccinated_pet' : vaccinated_pet
+        }
+        return redirect('/mypet/'+str(pk))
+    pet_to_vaccine = Pet.objects.get(id=pk)
+    context = {
+        'pet_to_vaccine' : pet_to_vaccine
+    }
+    return render(request,'vaccines.html',context)

@@ -2,9 +2,8 @@ from django.db import models
 from django.db.models.fields import CharField, DateField, DateTimeField, DecimalField, EmailField, IntegerField, PositiveSmallIntegerField, SmallIntegerField, TextField, TimeField
 from datetime import date
 import re,bcrypt
-from django.utils.text import slugify
 from django.db.models.fields.files import ImageField
-from django.db.models.fields.related import ForeignKey
+from django.db.models.fields.related import ForeignKey, ManyToManyField, OneToOneField
 from django.db.models.deletion import CASCADE
 from pet_safe_app import civalidator
 
@@ -108,32 +107,29 @@ class PetType(models.Model):
     created_at = DateField(auto_now_add=True)
     updated_at = DateField(auto_now=True)
 
+class Pet(models.Model):
+    pet_name = CharField(max_length=50)
+    pet_age = PositiveSmallIntegerField(null=True)
+    pet_birth_date = DateField()
+    pet_type = ForeignKey(PetType,related_name='pets_type',on_delete=CASCADE)
+    pet_breed = CharField(max_length=50)
+    pet_gender = CharField(max_length=6) 
+    pet_weight = DecimalField(decimal_places=2, max_digits=5)
+    pet_color = CharField(max_length=50)
+    description = CharField(max_length=250)
+    is_lost = SmallIntegerField(null=True)
+    pet_image = ImageField(upload_to='pet_image/')
+    pet_owner = ForeignKey(User, related_name='pets_owner', on_delete=CASCADE)
+    created_at = DateField(auto_now_add=True)
+    updated_at = DateField(auto_now=True)
+
 class Vaccine(models.Model):
     vaccine_name = CharField(max_length=50)
     vaccine_date = DateField()
     vaccine_next_date = DateField()
+    pet_id = ForeignKey(Pet, related_name="pet_vaccines",on_delete=CASCADE,null=True)
     created_at = DateField(auto_now_add=True)
     updated_at = DateField(auto_now=True)
-
-class Pet(models.Model):
-    pet_name = CharField(max_length=50)
-    pet_age = PositiveSmallIntegerField(null=True, blank=True)
-    pet_birth_date = DateField(null=True, blank=True)
-    pet_type = ForeignKey(PetType,related_name='pets',on_delete=CASCADE)
-    pet_breed = CharField(max_length=50)
-    pet_gender = CharField(max_length=6) 
-    pet_weight = DecimalField(decimal_places=2, max_digits=5, null=True, blank=True)
-    pet_color = CharField(max_length=50)
-    description = CharField(max_length=250)
-    is_lost = SmallIntegerField()
-    pet_image = ImageField(upload_to='pet_image/', blank=True)
-    pet_owner = ForeignKey(User, related_name='pets_owner', on_delete=CASCADE)
-    vaccines = ForeignKey(Vaccine, related_name="pet_vaccines",on_delete=CASCADE,null=True)
-    created_at = DateField(auto_now_add=True)
-    updated_at = DateField(auto_now=True)
-    def __str__(self):
-        return self.pet_name
-    
 
 class Clinic(models.Model):
     clinic_name = CharField(max_length=50)

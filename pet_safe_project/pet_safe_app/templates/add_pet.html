@@ -1,16 +1,57 @@
-{% extends 'base.html' %}
-{% block content %} 
-<div class="container">
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Please Register Your Pet Here!</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <form class="border border-success p-5" action="/add/petUser/" method="POST" enctype="multipart/form-data">
-                <h4>New Pet</h4>
-                {% if messages %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>Pets Care an Animals Category Bootstrap Responsive website Template | Home :: w3layouts</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Pets Care Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+		SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+		<script type="application/x-javascript">
+			addEventListener("load", function () {
+				setTimeout(hideURLbar, 0);
+			}, false);
+	
+			function hideURLbar() {
+				window.scrollTo(0, 1);
+			}
+		</script>
+		<!-- Custom Theme files -->
+		<link href="{% static 'css/bootstrap.css' %}" type="text/css" rel="stylesheet" media="all">
+		<link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css' />
+		<!-- easy-responsive-tabs -->
+	
+		<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="all">
+		<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+		<!-- font-awesome icons -->
+		<!-- //Custom Theme files -->
+		<!-- js -->
+		<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>
+		<!-- //js -->
+		<!-- web-fonts -->
+		<link href="//fonts.googleapis.com/css?family=Limelight" rel="stylesheet">
+		<link href="//fonts.googleapis.com/css?family=Junge" rel="stylesheet">
+		<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+			rel='stylesheet' type='text/css'>
+		<!-- //web-fonts -->
+	</head>
+
+<body>
+	<div class="agileits-banner about-w3banner">
+		<div class="bnr-agileinfo">
+			
+			{% include 'navbar.html' %}	
+		</div>
+	</div>
+
+	<div class="contact">
+		<div class="container">
+			<h3 class="agileits-title">Add your Pet Information</h3>
+			<div class="contact-agileinfo">
+				<div class="col-md-4 contact-right">
+					<form action="/add/petUser/" method="post">
+						{% if messages %}
                     {% for message in messages %}
                         {%if "register" in message.tags %}
                     <ul>
@@ -25,7 +66,7 @@
                     {% endfor %}
                     {% endif %}
                 {% csrf_token %}
-                <label class="form-label" for="pet_name">Pet Name:</label>
+				<label class="form-label" for="pet_name">Pet Name:</label>
                 <input class="form-control" name="pet_name" type="text">
 
                 <!-- <label class="form-label" for="pet_age">Pet Age:</label>
@@ -73,14 +114,58 @@
                 <br>
                 <label class="form-label" for="pet_image">Select your Pet Photo:</label>
                 <br>
-                {{ pet_image.as_p }}
+                <input  type="file" name="pet_image" id="pet_image" accept="image/pet_image/*">
                 <!-- <input  type="file" name="pet_image" id="pet_image" accept="image/*" required> -->
                 <!-- <input class="form-control" type="submit" value="Upload Image" name="submit"> -->
 
                 <br><br>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-        </div>
-    </div>
-</div>
-{% endblock %}
+				<input type="submit" value="SUBMIT">
+					</form>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/SmoothScroll.min.js"></script>
+	<!-- start-smooth-scrolling -->
+	<script type="text/javascript" src="js/move-top.js"></script>
+	<script type="text/javascript" src="js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- //end-smooth-scrolling -->
+	<!-- smooth-scrolling-of-move-up -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+			};
+			*/
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<!-- //smooth-scrolling-of-move-up -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/bootstrap.js"></script>
+</body>
+
+</html>

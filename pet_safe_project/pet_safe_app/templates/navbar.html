@@ -1,19 +1,36 @@
-<div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-        <a class="text-white" href="/home/">Home</a><br>
-        <a class="text-white" href="/edit/user/">My Profile</a><br>
-        <a class="text-muted" href="/logout/">Sign-off</a><br>
-        {% if logged_user.id == 1 %}
-        <a class="text-muted" href="/admin/">Admin</a>
-        {% endif %}
+
+<div class="agileits-banner about-w3banner">
+    <div class="bnr-agileinfo">
+        <div class="top-nav w3-agiletop">
+            <div class="agile_inner_nav_w3ls">
+                <div class="navbar-header w3llogo">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1><a href="/">Pets Care</a></h1>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="w3menu navbar-left">
+                        <ul class="nav navbar">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about/">About</a></li>
+                            <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="w3ls-bnr-icons social-icon navbar-right">
+                        <a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" class="social-button dribbble"><i class="fa fa-dribbble"></i></a>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <span class="navbar-brand">Welcome to PetSafe, {{ logged_user.fname }}</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        
-    </div>
-</nav>
+

@@ -38,63 +38,34 @@
 </head>
 
 <body>
-	<!-- banner -->
-	<div class="agileits-banner">
-		<div class="bnr-agileinfo">
-			<div class="banner-top w3layouts">
-				<div class="container">
-					<ul class="agile_top_section">
-						<li>
-							<a style="text-decoration: none;" href="#"><p>Pet Safe Website !</p></a>
-						</li>
-						<li>
-							<p><span class="glyphicon glyphicon-earphone"></span> +593 995 888 116 </p>
-						</li>
-						<li><a class="sign" href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>							</li>
-					</ul>
+		<!-- banner -->
+		<div class="agileits-banner">
+			<div class="bnr-agileinfo">
+				<div class="banner-top w3layouts">
+					<div class="container">
+						<ul class="agile_top_section">
+							<li>
+								<a style="text-decoration: none;" href="#"><p>Pet Safe Website !</p></a>
+							</li>
+							<li>
+								<p><span class="glyphicon glyphicon-earphone"></span> +593 995 888 116 </p>
+							</li>
+							<li><a class="sign" href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>							</li>
+						</ul>
+					</div>
 				</div>
-			</div>
-			<div class="banner-w3text w3layouts">
-				<p class="w3_text">Inspired by w3layouts</p>
-				<h3 class="w3ls_agile">Dog Cat Pet Care </h3>
+				<div class="banner-w3text w3layouts">
+					<p class="w3_text">Inspired by w3layouts</p>
+					<h3 class="w3ls_agile">Dog Cat Pet Care </h3>
+	
+					<h2>Pets Care</h2>
+				</div>
 
-				<h2>Pets Care</h2>
 			</div>
-			<!-- navigation -->
-			<div class="top-nav w3-agiletop">
-				<div class="agile_inner_nav_w3ls">
-					<div class="navbar-header w3llogo">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<h1><a href="index.html">Pets Care</a></h1>
-					</div>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<div class="w3menu navbar-left">
-							<ul class="nav navbar">
-								<li><a href="/" class="active">Home</a></li>
-								<li><a href="/about/">About</a></li>
-								<li><a href="/contact/">Contact</a></li>
-							</ul>
-						</div>
-						<div class="w3ls-bnr-icons social-icon navbar-right">
-							<a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-							<a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-							<a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a>
-							<a href="#" class="social-button dribbble"><i class="fa fa-dribbble"></i></a>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
-			<!-- //navigation -->
 		</div>
-	</div>
-	<!-- //banner -->
+		{% include 'navbar.html' %}
+		<!-- //banner -->
+	
 	<!-- Modal1 -->
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
@@ -105,15 +76,6 @@
 
 					<div class="signin-form profile">
 						<h3 class="agileinfo_sign">Sign In</h3>
-						<!-- <div class="login-form">
-							<form action="#" method="post">
-								<input type="email" name="email" placeholder="E-mail" required="">
-								<input type="password" name="password" placeholder="Password" required="">
-								<div class="tp">
-									<input type="submit" value="Sign In">
-								</div>
-							</form>
-						</div> -->
 						<div class="row">
 							<div class="col-12 d-flex justify-content-center">
 								<form class="border border-secondary p-5" action="/signin/" method="POST">

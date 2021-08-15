@@ -53,8 +53,6 @@
 						<div class="w3ls_single_left_grid_right">
 							<h3>Date of Birth:</h3>
 							<h5>{{my_pet.pet_birth_date}}</h5>
-							<h4>Owner: {{my_pet.pet_owner.fname}} {{my_pet.pet_owner.lname}}</h4>
-							<h4>Phone Number: 0{{my_pet.pet_owner.cphone}}</h4>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -63,41 +61,17 @@
 						<p style="text-align: justify;">{{my_pet.description}}</p>
 					</div>
 				</div>
-				{% if logged_user.id == my_pet.pet_owner.id %}
 				<div class="col-md-5 w3ls_single_right">
 					<div class="wthree_recent">
-						<h4>Recent Vaccines</h4>
+						<h4>Owner Information</h4>
 						<ul>
-							{% for vaccines in pet_vaccines %}
-							<li><i class="fa fa-check" aria-hidden="true"></i>{{ vaccines.vaccine_name }}<span><i class="fa fa-calendar" aria-hidden="true"></i>Date Administered: {{ vaccines.vaccine_date }}</span><br><span><i class="fa fa-calendar" aria-hidden="true"></i>Next Dose: {{ vaccines.vaccine_next_date }}</span></li>
-							{% endfor %}
-						</ul>
-						<a href="/add/vaccine/{{my_pet.id}}" class="button button-isi"><span>Add Vaccine Record</span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
+							<li><i class="fa fa-check" aria-hidden="true"></i>Name: {{my_pet.pet_owner.fname}} {{my_pet.pet_owner.lname}}<span>
+							<li><i class="fa fa-check" aria-hidden="true"></i>Cell Phone: {{my_pet.pet_owner.cphone}}<span>
+							<li><i class="fa fa-check" aria-hidden="true"></i>Home Phone: {{my_pet.pet_owner.hphone}}<span>
+							<li><i class="fa fa-check" aria-hidden="true"></i>E-mail: {{my_pet.pet_owner.email}}<span>					
+							</ul>
 					</div>
 				</div>
-				{% endif %}
-				<div class="clearfix"> </div>
-			</div>
-			<div class="agile_tags_cate">
-				<div class="col-md-4 agile_cat_grid">
-					<h4>More Info:</h4>
-					<div class="agile_cat_grid_tags">
-						<ul>
-							<li>Weight: {{my_pet.pet_weight}} Kilos</li>
-							<li>Breed: {{my_pet.pet_breed}}</li>
-							<li>Gender: {{my_pet.pet_gender}}</li>
-							<li>Color: {{my_pet.pet_color}}</li>
-						</ul>
-					</div>
-				</div>
-				{% if logged_user.id == my_pet.pet_owner.id %}
-				<div class="col-md-4 agile_cat_grid">
-					<h4><a style="text-decoration: none;" href="/report/{{my_pet.id}}">REPORTAR COMO PERDIDO</a></h4>
-				</div>
-				<div class="col-md-4 agile_cat_grid">
-					<h4><a href="/isback/{{my_pet.id}}">REPORTAR COMO ENCONTRADO</a></h4>
-				</div>
-				{% endif %}
 				<div class="clearfix"> </div>
 			</div>
 		</div>
