@@ -208,7 +208,7 @@ def addPet(request):
         return redirect('/')
     
     logged_user = User.objects.get(id=request.session['logged_user'])
-    pet_img_form = PetImageForm(data=request.GET)
+    pet_img_form = PetImageForm()
     context = {
         'logged_user': logged_user,
         'all_petType': PetType.objects.all(),
@@ -235,14 +235,10 @@ def addPetUser(request):
     pet_color = request.POST.get("pet_color")
     description = request.POST.get("description")
     is_lost = request.POST.get("is_lost")
-    #pet_image = request.POST.get("pet_image")
+    pet_image = request.POST.get("pet_image")
     pet_owner = User.objects.get(id=request.session['logged_user'])
 
-    pet_image = PetImageForm(data=request.POST)
-    pet_image.save(commit=False)
-    pet_image.pet_owner = pet_owner
-    pet_image.save()
-    print("**********************", pet_image)
+
     # vaccines = request.POST.get("vaccines")
 
 
@@ -294,6 +290,8 @@ def addPetUser(request):
     vaccines = '' # Realizar en tabla de las vacunas
     is_lost = 0 # Si es cero mascota recién creada y NO PERDIDA, si es 1 para mascota perdida
 
+
+
     Pet.objects.create(
         pet_name = pet_name,
         pet_age = pet_age,
@@ -309,6 +307,15 @@ def addPetUser(request):
         pet_owner = pet_owner,
         # vaccines = vaccines # Revisar
         )
+        
+    if request.method == 'POST':
+        img_form = PetImageForm(request.POST, request.FILES)
+        if img_form.is_valid():
+            instance = img_form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            print('###########################',instance)
+            
     print('\n\n**************\nFunción Cumplida\n\n**************')
     return redirect('/home/')
 #=====================================================================

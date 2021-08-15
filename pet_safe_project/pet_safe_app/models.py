@@ -127,18 +127,12 @@ class Pet(models.Model):
     description = CharField(max_length=250)
     is_lost = SmallIntegerField()
     pet_image = ImageField(upload_to='pet_image/', blank=True)
-    slug = models.SlugField(max_length=50, blank=True)
     pet_owner = ForeignKey(User, related_name='pets_owner', on_delete=CASCADE)
     vaccines = ForeignKey(Vaccine, related_name="pet_vaccines",on_delete=CASCADE,null=True)
     created_at = DateField(auto_now_add=True)
     updated_at = DateField(auto_now=True)
     def __str__(self):
         return self.pet_name
-    #override the save() method of the Pet model to generate a slug field based on the pet_name  
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.pet_name)
-        super().save(*args, **kwargs)
     
 
 class Clinic(models.Model):

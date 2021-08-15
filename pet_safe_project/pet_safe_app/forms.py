@@ -8,9 +8,9 @@ class PetImageForm(forms.ModelForm):
         model = Pet 
         fields = ('pet_image',)
     #save the current model instance to the database and return the object
-    def save(self, commit=True):
-        pet_image = super().save(commit=True)
-        return pet_image
+    #def save(self, commit=True):
+    #    pet_image = super().save(commit=True)
+    #    return pet_image
 
 
     
