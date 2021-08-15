@@ -381,3 +381,16 @@ def addVaccine(request,pk):
         'pet_to_vaccine' : pet_to_vaccine
     }
     return render(request,'vaccines.html',context)
+
+def lostPet(request, pet_id):
+    if "logged_user" not in request.session:
+        messages.error(request,"There is not logged user!! Log in first!")
+        return redirect('/')
+
+    context = {
+        'logged_user': User.objects.get(id=request.session['logged_user']),
+        'pet_vaccines' : Vaccine.objects.filter(pet_id=Pet.objects.get(id=pet_id)),
+        'my_pet': Pet.objects.get(id=pet_id)
+    }
+
+    return render(request,'single_found.html',context)

@@ -23,6 +23,7 @@ urlpatterns = [
     path('add/pet/',views.addPet),
     path('add/petUser/',views.addPetUser),
     path('mypet/<int:pet_id>',views.mypet),
+    path('lostpet/<int:pet_id>',views.lostPet),
     path('add/clinic/', views.addClinic),
     path('clinic/form/', views.clinicForm),
     path('list/clinic/', views.listClinics),
