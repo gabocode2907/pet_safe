@@ -45,7 +45,7 @@
 					<div class="container">
 						<ul class="agile_top_section">
 							<li>
-								<a style="text-decoration: none;" href="#"><p>Pet Safe Website !</p></a>
+								<a style="text-decoration: none;" href="#"><p>Petafe Website !</p></a>
 							</li>
 							<li>
 								<p><span class="glyphicon glyphicon-earphone"></span> +593 995 888 116 </p>
@@ -55,10 +55,10 @@
 					</div>
 				</div>
 				<div class="banner-w3text w3layouts">
-					<p class="w3_text">Inspired by w3layouts</p>
-					<h3 class="w3ls_agile">Dog Cat Pet Care </h3>
+					<p class="w3_text">Your Pet is our Priority</p>
+					<h3 class="w3ls_agile"></h3>
 	
-					<h2>Pets Care</h2>
+					<h2>PetSafe</h2>
 				</div>
 
 			</div>
@@ -99,7 +99,7 @@
 										{% endif %}
 									{% csrf_token %}
 									<input type="hidden" name="log_type" value="ct">
-									<label class="form-label" for="email">E-mail:</label>
+									<label class="form-label" aria-placeholder="Enter your e-mail" for="email">E-mail:</label>
 									<input class="form-control" type="email" name="email" id="email"><br>
 									<label class="form-label" for="pwd">Password:</label>
 									<input class="form-control" type="password" name="pwd" id="pwd"><br>
@@ -151,17 +151,17 @@
 								{% endif %}
 							{% csrf_token %}
 							<label class="form-label" for="fname">Name:</label>
-							<input class="form-control" name="fname" type="text">
+							<input class="form-control" placeholder="Enter Your Name" name="fname" type="text">
 							<label class="form-label" for="lname">Last Name:</label>
-							<input class="form-control" name="lname" type="text">
+							<input class="form-control" placeholder="Enter Your Last Name" name="lname" type="text">
 							<label class="form-label" for="cedula">ID:</label>
-							<input class="form-control" name="cedula" maxlength="10" type="text">
+							<input class="form-control" placeholder="Enter your ID" name="cedula" maxlength="10" type="text">
 							<label class="form-label" for="direccion">Address:</label>
-							<input class="form-control" name="direccion" maxlength="100" type="text">
+							<input class="form-control" placeholder="Enter Your Address" name="direccion" maxlength="100" type="text">
 							<label class="form-label" for="hphone">Home Phone:</label>
-							<input class="form-control" name="hphone" maxlength="10" type="text">
+							<input class="form-control" placeholder="Enter your Home Number" name="hphone" maxlength="10" type="text">
 							<label class="form-label" for="cphone">Cell Phone:</label>
-							<input class="form-control" name="cphone" maxlength="10" type="text">
+							<input class="form-control" placeholder="Enter your Cell Phone Number" name="cphone" maxlength="10" type="text">
 							<label class="form-label" for="sexo">Gender:</label>
 							<select class="form-control" name="sexo" id="sexo">
 								{% for gender in genders %}
@@ -171,7 +171,7 @@
 							<label class="form-label" for="dob">Date of Birth:</label>
 							<input class="form-control" name="dob" maxlength="10" type="date">
 							<label class="form-label" for="email">E-mail:</label>
-							<input class="form-control" type="email" name="email" id="email">
+							<input class="form-control" placeholder="Enter Your E-mail" type="email" name="email" id="email">
 							<label class="form-label" for="pwd">Password:</label>
 							<input class="form-control" type="password" name="pwd" id="pwd">
 							<label class="form-label" for="cpwd">Confirm Password:</label>

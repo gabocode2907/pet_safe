@@ -38,51 +38,43 @@
 </head>
 
 <body>
-	{% include 'navbar.html' %}		
-	<!-- welcome -->
-	<div class="contact">
+	{% include 'navbar.html' %}
+	<div class="services">
 		<div class="container">
-			<h3 class="agileits-title">Contact Us</h3>
-			<div class="contact-agileinfo">
-				<div class="col-md-7 contact-right">
-					<form action="#" method="post">
-						{% csrf_token %}
-						<input type="text" name="Name" placeholder="Name" required="">
-						<input type="text" class="email" name="Email" placeholder="Email" required="">
-						<input type="text" name="Phone no" placeholder="Phone" required="">
-						<textarea name="Message" placeholder="Message" required=""></textarea>
-						<input type="submit" value="SUBMIT">
-					</form>
+			<h3 class="agileits-title">List of Clinics</h3>
+			<div class="top_tabs_agile">
+				<div id="horizontalTab" class="top_tabs_agile">
+					<ul class="resp-tabs-list">
+						{% for clinic in all_clinics %}
+                        <li>
+							<i class="fa fa-hospital-o" aria-hidden="true"></i>{{clinic.clinic_name}}
+						</li>
+                        {% endfor %}
+					</ul>
+					<div class="resp-tabs-container">
+                        {% for clinic in all_clinics %}
+						<div class="tab1">
+							<div class="wthree_recent">
+								<h4>Clinic Information</h4>
+								<ul>
+									<li><i class="fa fa-check" aria-hidden="true"></i>Address: {{clinic.clinic_address}} {{my_pet.pet_owner.lname}}<span>
+									<li><i class="fa fa-check" aria-hidden="true"></i>Cell Phone: 0{{clinic.clinic_cphone}}<span>
+									<li><i class="fa fa-check" aria-hidden="true"></i>Home Phone: {{clinic.clinic_hphone}}<span>
+									<li><i class="fa fa-check" aria-hidden="true"></i>E-mail: {{clinic.clinic_email}}<span>					
+									</ul>
+							</div>
+						</div>
+                        {% endfor %}
+					</div>
 				</div>
-				<div class="col-md-5 contact-left">
-					<div class="address">
-						<h5>Address:</h5>
-						<p><i class="glyphicon glyphicon-home"></i> Inlaterra N31-210 y Av. Mariana de Jesus </p>
-					</div>
-					<div class="address address-mdl">
-						<h5>Phones:</h5>
-						<p><i class="glyphicon glyphicon-earphone"></i> +593 222 034 86</p>
-						<p><i class="glyphicon glyphicon-phone"></i> +593 995 888 1116</p>
-					</div>
-					<div class="address">
-						<h5>Email:</h5>
-						<p><i class="glyphicon glyphicon-envelope"></i> <a href="mailto:info@example.com">info@petsafe.com</a></p>
-					</div>
-				</div>
-				<div class="clearfix"></div>
 			</div>
 		</div>
-	</div>
-	<div class="agileits-w3layouts-map">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.191919395971!2d-78.48930103531669!3d-0.18295404016629901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a874dfee121%3A0x6cc5876d89c7ed18!2sBenalcazar%2C%20Quito%20170102!5e0!3m2!1sen!2sec!4v1628746464131!5m2!1sen!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-		    allowfullscreen></iframe>
 	</div>
 	<div class="copy-w3right">
 		<div class="container">
 			<p>© 2021Pet Safe. All Rights Reserved</p>
 		</div>
-	</div>	
-
+	</div>
 	<!-- text-effect -->
 	<script type="text/javascript" src="{% static 'js/jquery.transit.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/jquery.textFx.js' %}"></script>
@@ -104,6 +96,26 @@
 			});
 		});
 	</script>
+
+	<!-- //copy right end here -->
+	<!-- password-script -->
+	<script type="text/javascript">
+		window.onload = function () {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+
+		function validatePassword() {
+			var pass2 = document.getElementById("password2").value;
+			var pass1 = document.getElementById("password1").value;
+			if (pass1 != pass2)
+				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');
+			//empty string means no validation error
+		}
+	</script>
+	<!-- //password-script -->
 
 	<!-- script for responsive tabs -->
 	<script src="{% static 'js/easy-responsive-tabs.js' %}"></script>

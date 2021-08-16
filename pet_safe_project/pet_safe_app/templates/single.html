@@ -91,12 +91,16 @@
 					</div>
 				</div>
 				{% if logged_user.id == my_pet.pet_owner.id %}
+				{% if my_pet.is_lost == 0 %}
 				<div class="col-md-4 agile_cat_grid">
 					<h4><a style="text-decoration: none;" href="/report/{{my_pet.id}}">REPORTAR COMO PERDIDO</a></h4>
 				</div>
+				{% endif %}
+				{% if my_pet.is_lost == 1 %}
 				<div class="col-md-4 agile_cat_grid">
 					<h4><a href="/isback/{{my_pet.id}}">REPORTAR COMO ENCONTRADO</a></h4>
 				</div>
+				{% endif %}
 				{% endif %}
 				<div class="clearfix"> </div>
 			</div>

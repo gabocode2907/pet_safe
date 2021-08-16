@@ -56,9 +56,9 @@
                         {% for pet in all_pets %}
 						<div class="tab1">
 							<div class="services-right-agileits">
-								<img style="width: 390px; width: auto;" src="{{ pet.pet_image.url }}" alt="">
+								<img class="col-sm-6 col-xs-6  figure" src="{{ pet.pet_image.url }}" alt="" title="Pets Care Image"/> 
 								<p class="para-agileits-w3layouts">{{pet.description}}</p>
-								<a href="/mypet/{{pet.id}}" class="button button-isi"><span>Read More </span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
+								<a href="/mypet/{{pet.id}}" class="button button-isi"><span>View Profile</span><i class="icon glyphicon glyphicon-arrow-right"></i></a>
 							</div>
 						</div>
                         {% endfor %}

@@ -21,10 +21,25 @@ def login(request):
     return render(request,'signin.html')
 
 def about(request):
-    return render(request,'about.html')
+    if "logged_user" not in request.session:
+        return render(request,'about.html')
+    logged_user = User.objects.get(id=request.session['logged_user'])
+    context = {
+        'logged_user' : logged_user
+    }
+    return render(request,'about.html',context)
 
 def contact(request):
-    return render(request,'contact.html')
+    if "logged_user" not in request.session:
+        return render(request,'contact.html')
+    logged_user = User.objects.get(id=request.session['logged_user'])
+    context = {
+        'logged_user' : logged_user
+    }
+    return render(request,'contact.html',context)
+
+def gallery(request):
+    return render(request,'gallery.html')
 
 def signin(request):
     if request.method == "POST":
@@ -40,9 +55,6 @@ def signin(request):
     return redirect('/signin/')
 
 def addRole(request):
-    # if "logged_user" not in request.session:
-    #     messages.error(request,"There is not logged user!! Log in first!")
-    #     return redirect('/')
     if request.method == "POST":
         Rol.objects.create(rol=request.POST['role'])
     return redirect('/admin/')
@@ -84,16 +96,16 @@ def addUser(request):
     return redirect('/')
 
 def admin(request):
-    # if "logged_user" not in request.session:
-    #     messages.error(request,"There is not logged user!! Log in first!")
-    #     return redirect('/signin/')
+    if "logged_user" not in request.session:
+        messages.error(request,"There is not logged user!! Log in first!")
+        return redirect('/signin/')
     roles = Rol.objects.all()
     users = User.objects.all()
-    # logged_user = User.objects.get(id=request.session['logged_user'])
+    logged_user = User.objects.get(id=request.session['logged_user'])
     context = {
         'roles' : roles,
         'users' : users,
-        # 'logged_user' : logged_user
+        'logged_user' : logged_user
     }
     return render(request,'admin.html',context)
 
@@ -116,11 +128,6 @@ def home(request):
         'lost_pets' : lost_pets
     }   
     return render(request,'home.html',context)
-
-# def deleteUser(request,pk):
-#     usr_to_del = User.objects.get(id =pk)
-#     usr_to_del.delete()
-#     return redirect('/dashboard/')
 
 def editUser(request):
     if "logged_user" not in request.session:
@@ -234,6 +241,7 @@ def addPetUser(request):
     pet_weight = request.POST.get("pet_weight")
     pet_color = request.POST.get("pet_color")
     description = request.POST.get("description")
+    pet_image = request.POST.get("pet_image")
 
     if len(pet_name) <2:
         messages.error(request, 'Your Pet Name must be at least 2 characters')
@@ -254,19 +262,15 @@ def addPetUser(request):
         messages.error(request, 'Please insert a short description of your pet')
         return redirect('/add/pet/')
 
-    # if not pet_image:
-    #     messages.error(request, 'Please upload your Pet Photo')
-    #     return redirect('/add/pet/')
+    if not pet_image:
+        messages.error(request, 'Please upload your Pet Photo')
+        return redirect('/add/pet/')
 
     fecha_dt = datetime.strptime(pet_birth_date, '%Y-%m-%d')
     def calculate_age(born):
         today = date.today()
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
     pet_age = calculate_age(fecha_dt)
-    # print('La edad de la Mascota es:',pet_age)
-
-    vaccines = '' # Realizar en tabla de las vacunas
-    is_lost = 0 # Si es cero mascota recién creada y NO PERDIDA, si es 1 para mascota perdida
 
     if request.method == 'POST':
         img_form = PetImageForm(request.POST, request.FILES)
@@ -284,8 +288,6 @@ def addPetUser(request):
             new_img.pet_color = pet_color
             new_img.description = description
             new_img.save()
-
-
 
     print('\n\n**************\nFunción Cumplida\n\n**************')
     return redirect('/home/')

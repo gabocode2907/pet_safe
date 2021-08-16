@@ -53,71 +53,42 @@
 					<form action="/add/petUser/" method="post" enctype="multipart/form-data">
 						{% if messages %}
                     {% for message in messages %}
-                        {%if "register" in message.tags %}
+
                     <ul>
                         <li style="color: brown;">{{message}}</li>
                     </ul>
-                        {% endif %}
-                        {%if "success" in message.tags %}
-                    <ul>
-                        <li style="color: green;">{{message}}</li>
-                    </ul>
-                        {% endif %}
                     {% endfor %}
                     {% endif %}
                 {% csrf_token %}
 				<label class="form-label" for="pet_name">Pet Name:</label>
-                <input class="form-control" name="pet_name" type="text">
-
-                <!-- <label class="form-label" for="pet_age">Pet Age:</label>
-                <input class="form-control" name="pet_age" type="Number"> -->
-
+                <input class="form-control" placeholder="Enter Pet Name" name="pet_name" type="text">
                 <label class="form-label" for="pet_birth_date">Birth Day:</label>
                 <input class="form-control" name="pet_birth_date" type="date">
-
                 <label class="form-label" for="pet_type">Pet Type:</label>
                 <select class="form-control" name="pet_type" maxlength="100" type="text">
-                    <option value ='-1'>Seleccione una opción</option>
+                    <option value ='-1'>Please Select</option>
                     {% for i in all_petType %}
                         <option value="{{i.id}}"> {{i.specie}}</option>
                     {% endfor %}
                 </select>
-
                 <label class="form-label" for="pet_breed">Breed:</label>
-                <input class="form-control" name="pet_breed" maxlength="30" type="text">
-
+                <input class="form-control" placeholder="Enter Pet Breed" name="pet_breed" maxlength="30" type="text">
                 <label class="form-label" for="pet_gender">Gender:</label>
                 <select class="form-control" name="pet_gender" maxlength="10" type="text">
-                    <option value ='-1'>Seleccione una opción</option>
+                    <option value ='-1'>Please Select</option>
                     <option value ='Macho'>Macho</option>
                     <option value ='Hembra'>Hembra</option>
                 </select>
-
                 <label class="form-label" for="pet_weight">Weight [kg]:</label>
-                <input class="form-control" name="pet_weight" type="Number"></input>
-
+                <input class="form-control" placeholder="0.00" name="pet_weight" type="Number"></input>
                 <label class="form-label" for="pet_color">Color:</label>
-                <input class="form-control" name="pet_color" type="Text"></input>
-
+                <input class="form-control" placeholder="Enter Pet Color" name="pet_color" type="Text"></input>
                 <label class="form-label" for="description">Description:</label>
-                <textarea class="form-control" name="description" type="Text"></textarea>
-
-                <!-- <label class="form-label" for="is_lost">Lost:</label>
-                <input class="form-control" name="is_lost" type="Text"></input> -->
-                
-                <!-- <label class="form-label" for="pet_owner">Pet Owner:</label>
-                <input class="form-control" name="pet_owner" type="Text"></input> -->
-
-                <!-- <label class="form-label" for="vaccines">Vaccines:</label>
-                <input class="form-control" name="vaccines" type="Text"></input> -->
-
+                <textarea class="form-control" placeholder="Enter a brief description of your pet!" name="description" type="Text"></textarea>
                 <br>
                 <label class="form-label" for="pet_image">Select your Pet Photo:</label>
                 <br>
                 <input  type="file" name="pet_image" id="pet_image" accept="image/pet_image/*">
-                <!-- <input  type="file" name="pet_image" id="pet_image" accept="image/*" required> -->
-                <!-- <input class="form-control" type="submit" value="Upload Image" name="submit"> -->
-
                 <br><br>
 				<input type="submit" value="SUBMIT">
 					</form>

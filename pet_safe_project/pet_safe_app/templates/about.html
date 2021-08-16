@@ -62,7 +62,7 @@
 								<img src="{% static 'images/img2.jpg' %}" alt="" />
 							</div>
 							<div class="back">
-								<h4>Peter Parker</h4>
+								<h4>Gabriel Tapia</h4>
 								<p>Pet Lover</p>
 								<div class="w3l-social">
 									<ul>
@@ -201,7 +201,7 @@
 						</div>
 						<div class="icon-right">
 							<h5>Veterinary Help</h5>
-							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+							<p>We have partnered with the best Veterinary Clinics close to you!</p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -212,8 +212,8 @@
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
 						</div>
 						<div class="icon-right">
-							<h5>Visiting Hours</h5>
-							<p>Phasellus dapibus felis elit, sed accumsan arcu gravida vitae. Nullam aliquam erat..</p>
+							<h5>Pet Locator</h5>
+							<p>Report your lost pet and let us find it for you!! NFC and QR Codes to identify your pet.</p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -251,24 +251,7 @@
 	</script>
 
 	<!-- //copy right end here -->
-	<!-- password-script -->
-	<script type="text/javascript">
-		window.onload = function () {
-			document.getElementById("password1").onchange = validatePassword;
-			document.getElementById("password2").onchange = validatePassword;
-		}
 
-		function validatePassword() {
-			var pass2 = document.getElementById("password2").value;
-			var pass1 = document.getElementById("password1").value;
-			if (pass1 != pass2)
-				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-			else
-				document.getElementById("password2").setCustomValidity('');
-			//empty string means no validation error
-		}
-	</script>
-	<!-- //password-script -->
 
 	<!-- script for responsive tabs -->
 	<script src="{% static 'js/easy-responsive-tabs.js' %}"></script>

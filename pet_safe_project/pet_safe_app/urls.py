@@ -26,8 +26,9 @@ urlpatterns = [
     path('lostpet/<int:pet_id>',views.lostPet),
     path('add/clinic/', views.addClinic),
     path('clinic/form/', views.clinicForm),
-    path('list/clinic/', views.listClinics),
+    path('list/clinics/', views.listClinics),
     path('view/<int:pk>',views.viewClinic),
     path('add/vaccine/<int:pk>/', views.addVaccine),
-    path('new/vaccine/<int:pk>/', views.addVaccine)
+    path('new/vaccine/<int:pk>/', views.addVaccine),
+    path('gallery/',views.gallery),
 ]
