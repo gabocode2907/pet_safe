@@ -234,33 +234,22 @@ def addPetUser(request):
     pet_weight = request.POST.get("pet_weight")
     pet_color = request.POST.get("pet_color")
     description = request.POST.get("description")
-    #is_lost = request.POST.get("is_lost")
-    #pet_type = PetType.objects.get(id=request.POST.get("pet_type"))    
-    #user = User.objects.get(id=request.session['logged_user'])
-    #pet_image = 'pet_image/'+ request.POST.get("pet_image")
-    #pet_owner = User.objects.get(id=request.session['logged_user'])
-
 
     if len(pet_name) <2:
         messages.error(request, 'Your Pet Name must be at least 2 characters')
         return redirect('/add/pet/')
-
     if len(pet_birth_date ) <1:
         messages.error(request, 'Please insert your Pet Birth Day')
         return redirect('/add/pet/')
-
     if len(pet_breed) <1:
         messages.error(request, 'Please select your Pet Breed')
         return redirect('/add/pet/')
-
     if len(pet_weight) <1:
         messages.error(request, 'Please insert your Pet Weight')
         return redirect('/add/pet/')
-
     if len(pet_color) <1:
         messages.error(request, 'Please insert your Pet Color')
-        return redirect('/add/pet/')
-    
+        return redirect('/add/pet/')   
     if len(description) <1:
         messages.error(request, 'Please insert a short description of your pet')
         return redirect('/add/pet/')
@@ -276,27 +265,8 @@ def addPetUser(request):
     pet_age = calculate_age(fecha_dt)
     # print('La edad de la Mascota es:',pet_age)
 
-
     vaccines = '' # Realizar en tabla de las vacunas
     is_lost = 0 # Si es cero mascota recién creada y NO PERDIDA, si es 1 para mascota perdida
-
-    '''
-    Pet.objects.create(
-        pet_name = pet_name,
-        pet_age = pet_age,
-        pet_birth_date = pet_birth_date,
-        pet_type = pet_type,
-        pet_breed = pet_breed,
-        pet_gender = pet_gender,
-        pet_weight = pet_weight,
-        pet_color = pet_color,
-        description = description,
-        is_lost = is_lost,
-        pet_image = pet_image,
-        pet_owner = pet_owner,
-        # vaccines = vaccines # Revisar
-        )
-    '''
 
     if request.method == 'POST':
         img_form = PetImageForm(request.POST, request.FILES)
