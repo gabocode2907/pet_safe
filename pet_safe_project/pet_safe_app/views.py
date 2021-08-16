@@ -227,19 +227,18 @@ def addPetUser(request):
         messages.error(request,"There is not logged user!! Log in first!")
         return redirect('/')
     
-    user = User.objects.get(id=request.session['logged_user'])
     pet_name = request.POST.get("pet_name")
     pet_birth_date = request.POST.get("pet_birth_date")
-    pet_type = PetType.objects.get(id=request.POST.get("pet_type"))
     pet_breed = request.POST.get("pet_breed")
     pet_gender = request.POST.get("pet_gender")
     pet_weight = request.POST.get("pet_weight")
     pet_color = request.POST.get("pet_color")
     description = request.POST.get("description")
-    is_lost = request.POST.get("is_lost")
-    pet_image = 'pet_image/'+ request.POST.get("pet_image")
-    print(pet_image)
-    pet_owner = User.objects.get(id=request.session['logged_user'])
+    #is_lost = request.POST.get("is_lost")
+    #pet_type = PetType.objects.get(id=request.POST.get("pet_type"))    
+    #user = User.objects.get(id=request.session['logged_user'])
+    #pet_image = 'pet_image/'+ request.POST.get("pet_image")
+    #pet_owner = User.objects.get(id=request.session['logged_user'])
 
 
     if len(pet_name) <2:
@@ -281,6 +280,7 @@ def addPetUser(request):
     vaccines = '' # Realizar en tabla de las vacunas
     is_lost = 0 # Si es cero mascota recién creada y NO PERDIDA, si es 1 para mascota perdida
 
+    '''
     Pet.objects.create(
         pet_name = pet_name,
         pet_age = pet_age,
@@ -296,11 +296,27 @@ def addPetUser(request):
         pet_owner = pet_owner,
         # vaccines = vaccines # Revisar
         )
-    # img_form = PetImageForm(request.POST,request.FILES)
-    # if img_form.is_valid():
-    #     instance = img_form.save(commit=False)
-    #     instance.user = request.user
-    #     instance.save()
+    '''
+
+    if request.method == 'POST':
+        img_form = PetImageForm(request.POST, request.FILES)
+        if img_form.is_valid():
+            new_img = img_form.save(commit=False)
+            new_img.pet_owner = User.objects.get(id=request.session['logged_user'])
+            new_img.pet_type = PetType.objects.get(id=request.POST.get("pet_type"))
+            new_img.is_lost = 0
+            new_img.pet_name = pet_name
+            new_img.pet_age = pet_age
+            new_img.pet_birth_date = pet_birth_date
+            new_img.pet_breed = pet_breed
+            new_img.pet_gender = pet_gender
+            new_img.pet_weight = pet_weight
+            new_img.pet_color = pet_color
+            new_img.description = description
+            new_img.save()
+
+
+
     print('\n\n**************\nFunción Cumplida\n\n**************')
     return redirect('/home/')
 #=====================================================================

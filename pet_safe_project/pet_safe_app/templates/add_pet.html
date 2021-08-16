@@ -50,7 +50,7 @@
 			<h3 class="agileits-title">Add your Pet Information</h3>
 			<div class="contact-agileinfo">
 				<div class="col-md-4 contact-right">
-					<form action="/add/petUser/" method="post">
+					<form action="/add/petUser/" method="post" enctype="multipart/form-data">
 						{% if messages %}
                     {% for message in messages %}
                         {%if "register" in message.tags %}
