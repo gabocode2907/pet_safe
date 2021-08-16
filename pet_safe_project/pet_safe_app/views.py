@@ -262,9 +262,9 @@ def addPetUser(request):
         messages.error(request, 'Please insert a short description of your pet')
         return redirect('/add/pet/')
 
-    if not pet_image:
-        messages.error(request, 'Please upload your Pet Photo')
-        return redirect('/add/pet/')
+    # if not pet_image:
+    #     messages.error(request, 'Please upload your Pet Photo')
+    #     return redirect('/add/pet/')
 
     fecha_dt = datetime.strptime(pet_birth_date, '%Y-%m-%d')
     def calculate_age(born):
