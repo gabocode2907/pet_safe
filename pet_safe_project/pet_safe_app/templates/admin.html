@@ -1,12 +1,52 @@
-{% extends 'base.html' %}
-{% block content %} 
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Pets Care an Animals Category Bootstrap Responsive website Template | Home :: w3layouts</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Pets Care Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+	<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Custom Theme files -->
+	<link href="{% static 'css/bootstrap.css' %}" type="text/css" rel="stylesheet" media="all">
+	<link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css' />
+	<!-- easy-responsive-tabs -->
+
+	<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="all">
+	<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+	<!-- font-awesome icons -->
+	<!-- //Custom Theme files -->
+	<!-- js -->
+	<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>
+	<!-- //js -->
+	<!-- web-fonts -->
+	<link href="//fonts.googleapis.com/css?family=Limelight" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Junge" rel="stylesheet">
+	<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+	    rel='stylesheet' type='text/css'>
+	<!-- //web-fonts -->
+</head>
+<body>
+    {% include 'navbar.html' %}	
+    <div class="row"><br>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <h1>Consola de Administracion</h1>
         </div>
-    </div>
+    </div><br>
     <div class="row">
-        <div class="col-6 d-flex justify-content-center">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
             <form class="border border-success p-5" action="/add/clinic/" method="POST">
                 <h4>Register new clinic</h4>
                 {% if messages %}
@@ -33,36 +73,128 @@
                 <label class="form-label" for="clinic_cphone">Cell Phone:</label>
                 <input class="form-control" name="clinic_cphone" maxlength="10" type="text">
                 <label class="form-label" for="clinic_email">E-mail:</label>
-                <input class="form-control" type="email" name="clinic_email" id="email">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <input class="form-control" type="email" name="clinic_email" id="email"><br>
+                <button type="submit" class="button button-isi">Register</button>
             </form>
         </div>
-        <div class="col-6 d-flex justify-content-center position-relative">
-            <div class="position-absolute top-0">
-                <form class="border border-success p-5" action="/add/role/" method="POST" style="height: 280px;">
-                    <h4>Roles</h4>
-                    {% csrf_token %} 
-                    <label class="form-label" for="role">Rol:</label>
-                    <input class="form-control" name="role" type="text"><br>
-                    <button type="submit" class="btn btn-success">Crear Rol</button>
-                </form>
-                <hr>
+        <div class="col-md-2">
+            <form class="border border-success p-5" action="/add/role/" method="POST" style="height: 280px;">
+                <h4>Roles</h4>
+                {% csrf_token %} 
+                <label class="form-label" for="role">Rol:</label>
+                <input class="form-control" name="role" type="text"><br>
+                <button type="submit" class="button button-isi">Crear Rol</button>
+            </form>
+        </div>
+        <div class="col-md-2">
                 <form class="border border-success p-5" action="/add/gender/" method="POST" style="height: 280px;">
                     <h4>Generos</h4>
                     {% csrf_token %} 
                     <label class="form-label" for="gender">Genero:</label>
                     <input class="form-control" name="gender" type="text"><br>
-                    <button type="submit" class="btn btn-success">Insertar</button>
+                    <button type="submit" class="button button-isi">Insertar</button>
                 </form>
-                <hr>
+            </div>
+            <div class="col-md-2">
                 <form class="border border-success p-5" action="/add/type/" method="POST" style="height: 280px;">
                     <h4>Tipo de Mascota</h4>
                     {% csrf_token %} 
                     <label class="form-label" for="pet_type">Tipo:</label>
                     <input class="form-control" name="pet_type" type="text"><br>
-                    <button type="submit" class="btn btn-success">Insertar</button>
+                    <button type="submit" class="button button-isi">Insertar</button>
                 </form>
             </div>
         </div>
     </div>  
-{% endblock %}
+	<!-- text-effect -->
+	<script type="text/javascript" src="{% static 'js/jquery.transit.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.textFx.js' %}"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.w3ls_agile').textFx({
+				type: 'fadeIn',
+				iChar: 100,
+				iAnim: 1000
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.w3_text').textFx({
+				type: 'fadeIn',
+				iChar: 100,
+				iAnim: 1000
+			});
+		});
+	</script>
+
+	<!-- //copy right end here -->
+
+
+	<!-- script for responsive tabs -->
+	<script src="{% static 'js/easy-responsive-tabs.js' %}"></script>
+	<script>
+		$(document).ready(function () {
+			$('#horizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion           
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				closed: 'accordion', // Start closed if in accordion view
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#tabInfo');
+					var $name = $('span', $info);
+					$name.text($tab.text());
+					$info.show();
+				}
+			});
+			$('#verticalTab').easyResponsiveTabs({
+				type: 'vertical',
+				width: 'auto',
+				fit: true
+			});
+		});
+	</script>
+	<!-- script for responsive tabs -->
+	<script src="{% static 'js/SmoothScroll.min.js' %}"></script>
+	<!-- start-smooth-scrolling -->
+	<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- //end-smooth-scrolling -->
+	<!-- smooth-scrolling-of-move-up -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+			};
+			*/
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<!-- //smooth-scrolling-of-move-up -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>

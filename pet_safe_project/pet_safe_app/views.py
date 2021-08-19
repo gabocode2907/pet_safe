@@ -9,9 +9,13 @@ from django.core.mail import send_mail
 from .forms import PetImageForm
 
 def index(request):
+    if "logged_user" not in request.session:
+        return render(request,'index.html')
     genders = Gender.objects.all()
+    logged_user = User.objects.get(id=request.session['logged_user'])
     context = {
-        'genders' : genders
+        'genders' : genders,
+        'logged_user' : logged_user
     }
     return render(request,'index.html',context)
 
@@ -45,12 +49,12 @@ def signin(request):
         if len(login_errors) > 0:
             for key, value in login_errors.items():
                 messages.error(request,value,extra_tags='login')
-            return redirect('/signin/')
+            return redirect('/')
         logged_user = User.objects.get(email=request.POST['email'])
         request.session['logged_user'] = logged_user.id
         request.session['user_role'] = logged_user.rol.id
         return redirect('/home/') 
-    return redirect('/signin/')
+    return redirect('/')
 
 def addRole(request):
     if request.method == "POST":
@@ -161,39 +165,54 @@ def editUser(request):
     context['up_date']= str(context['user_to_edit'].dob)
     return render(request,'edit_user.html',context)
 
-def editPet(request):
+def editPet(request,pk):
     if "logged_user" not in request.session:
         messages.error(request,"There is not logged user!! Log in first!")
         return redirect('/signin/')
     if request.method == "POST":
-        user_to_edit = User.objects.get(id=request.session['logged_user'])
-        errors = User.objects.update_validator(request.POST)
-        if len(errors) > 0:
-            for key, value in errors.items():
-                messages.error(request,value,extra_tags='edituser')
-            return redirect('/edit/user/')
-        else:
-            user_to_edit.fname = request.POST['fname']
-            user_to_edit.lname = request.POST['lname']
-            user_to_edit.direccion = request.POST['direccion']
-            user_to_edit.hphone = request.POST['hphone']
-            user_to_edit.cphone = request.POST['cphone']
-            user_to_edit.sexo = Gender.objects.get(id=request.POST['sexo'])
-            user_to_edit.dob = request.POST['dob']
-            user_to_edit.email = request.POST['email']
-            # user_to_edit.password = request.POST['pwd']
-            user_to_edit.save()
-            return redirect('/edit/user/')
-    user_to_edit = User.objects.get(id=request.session['logged_user'])
+        pet_to_edit = Pet.objects.get(id=pk)
+        img_form = PetImageForm(request.POST, request.FILES,instance=pet_to_edit)
+        fecha_dt = datetime.strptime(request.POST['pet_birth_date'], '%Y-%m-%d')
+        def calculate_age(born):
+            today = date.today()
+            return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        pet_age = calculate_age(fecha_dt)
+        if img_form.is_valid():
+            new_img = img_form.save(commit=False)
+            new_img.pet_owner = User.objects.get(id=request.session['logged_user'])
+            new_img.pet_type = PetType.objects.get(id=request.POST.get("pet_type"))
+            new_img.is_lost = pet_to_edit.is_lost
+            new_img.pet_name = request.POST['pet_name']
+            new_img.pet_age = pet_age
+            new_img.pet_birth_date = request.POST['pet_birth_date']
+            new_img.pet_breed = request.POST['pet_breed']
+            new_img.pet_gender = request.POST['pet_gender']
+            new_img.pet_weight = request.POST['pet_weight']
+            new_img.pet_color = request.POST['pet_color']
+            new_img.description = request.POST['description']
+            new_img.save()
+        # pet_to_edit = Pet.objects.get(id=pk)
+        # pet_to_edit.pet_name = request.POST['pet_name']
+        # pet_to_edit.pet_birth_date = request.POST['pet_birth_date']
+        # pet_to_edit.pet_type = PetType.objects.get(id=request.POST['pet_type'])
+        # pet_to_edit.pet_breed = request.POST['pet_breed']
+        # pet_to_edit.pet_gender = request.POST['pet_gender']
+        # pet_to_edit.pet_weight = request.POST['pet_weight']
+        # pet_to_edit.pet_color = request.POST['pet_color']
+        # pet_to_edit.description = request.POST['description']
+        # pet_to_edit.pet_image = request.POST.get("pet_image")
+        # pet_to_edit.save()
+        return redirect('/edit/pet/'+str(pk))
+    pet_to_edit = Pet.objects.get(id=pk)
     logged_user = User.objects.get(id=request.session['logged_user'])
-    genders = Gender.objects.all()
+    pet_type = PetType.objects.all().exclude(id=pet_to_edit.id);
     context = {
-        'user_to_edit' : user_to_edit,
-        'genders' : genders,
-        'logged_user' : logged_user
+        'pet_to_edit' : pet_to_edit,
+        'logged_user' : logged_user,
+        'pet_type' : pet_type
     }
-    context['up_date']= str(context['user_to_edit'].dob)
-    return render(request,'edit_user.html',context)
+    context['up_date']= str(context['pet_to_edit'].pet_birth_date)
+    return render(request,'edit_pet.html',context)
 
 
 def logout(request):
