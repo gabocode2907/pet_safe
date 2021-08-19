@@ -1,11 +1,9 @@
 from .models import  Pet, User,Rol,Gender,PetType,Clinic, Vaccine
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from django.urls.conf import include
 from django.contrib import messages
 import bcrypt
 from datetime import date
-from pprint import pp, pprint
 from datetime import datetime
 from django.core.mail import send_mail
 from .forms import PetImageForm
