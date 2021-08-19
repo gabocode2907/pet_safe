@@ -163,6 +163,41 @@ def editUser(request):
     context['up_date']= str(context['user_to_edit'].dob)
     return render(request,'edit_user.html',context)
 
+def editPet(request):
+    if "logged_user" not in request.session:
+        messages.error(request,"There is not logged user!! Log in first!")
+        return redirect('/signin/')
+    if request.method == "POST":
+        user_to_edit = User.objects.get(id=request.session['logged_user'])
+        errors = User.objects.update_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request,value,extra_tags='edituser')
+            return redirect('/edit/user/')
+        else:
+            user_to_edit.fname = request.POST['fname']
+            user_to_edit.lname = request.POST['lname']
+            user_to_edit.direccion = request.POST['direccion']
+            user_to_edit.hphone = request.POST['hphone']
+            user_to_edit.cphone = request.POST['cphone']
+            user_to_edit.sexo = Gender.objects.get(id=request.POST['sexo'])
+            user_to_edit.dob = request.POST['dob']
+            user_to_edit.email = request.POST['email']
+            # user_to_edit.password = request.POST['pwd']
+            user_to_edit.save()
+            return redirect('/edit/user/')
+    user_to_edit = User.objects.get(id=request.session['logged_user'])
+    logged_user = User.objects.get(id=request.session['logged_user'])
+    genders = Gender.objects.all()
+    context = {
+        'user_to_edit' : user_to_edit,
+        'genders' : genders,
+        'logged_user' : logged_user
+    }
+    context['up_date']= str(context['user_to_edit'].dob)
+    return render(request,'edit_user.html',context)
+
+
 def logout(request):
     request.session.flush()
     return redirect('/')
@@ -262,9 +297,9 @@ def addPetUser(request):
         messages.error(request, 'Please insert a short description of your pet')
         return redirect('/add/pet/')
 
-    if not pet_image:
-        messages.error(request, 'Please upload your Pet Photo')
-        return redirect('/add/pet/')
+    # if not pet_image:
+    #     messages.error(request, 'Please upload your Pet Photo')
+    #     return redirect('/add/pet/')
 
     fecha_dt = datetime.strptime(pet_birth_date, '%Y-%m-%d')
     def calculate_age(born):

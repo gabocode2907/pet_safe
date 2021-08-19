@@ -15,6 +15,7 @@ urlpatterns = [
     path('signin/',views.signin),
     path('home/',views.home),
     path('edit/user/',views.editUser),
+    path('edit/pet/',views.editPet),
     path('logout/',views.logout),
     path('report/<int:pk>/',views.reportPet),
     path('isback/<int:pk>/',views.isBack),

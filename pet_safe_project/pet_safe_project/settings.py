@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_4_*fq2e-3j&ng2!e=(+e_#ro+fv863t_t@9=r(4s_oqo5_i+f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['petsafe.us-east-2.elasticbeanstalk.com','127.0.0.0','localhost']
 
 
 # Application definition
@@ -120,7 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -140,3 +140,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'static'),
 	)
+
+#Static files(CSS, JavaScript, Images)
+ 
+CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+ 
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(CORE_DIR, 'pet_safe_app/static'),
+)
+
